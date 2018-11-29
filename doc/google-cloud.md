@@ -89,24 +89,6 @@ $ gcloud config set project [PROJECT_NAME]
 $ gcloud container clusters get-credentials [CLUSTER_NAME]
 ```
 
-# Initial Project install / setup
- 
-- Create a project in google cloud: 'royal-2018-demo'
-  - Also setup your local shell gcloud to point at this new project: $ gcloud config set project royal-2018-demo
-- Navigate to the project's Container Registry via google cloud console. Make sure it is enabled, or docker image pushes fail.
-- Setup istio bookinfo sample for GKE following _all_ the steps: https://istio.io/docs/setup/kubernetes/quick-start-gke-dm/
-  - Make sure you do all the IAM stuff too or you will be sorry later!
-  - For the 'Launch Deployment Manager' section, when in the Istio GKE Deployment manager webapp do:
-    - Change the deployment name to 'royal-cluster'
-    - Change the cluster name from 'istio-cluster' to 'royal-cluster'
-    - Change the Zone to 'us-east4-c'
-    - Leave everything else same in web form and click the 'deploy' button.
-  - In the 'Bootstrap gcloud' section of instructions, do this instead:
-    - $ gcloud config set project royal-2018-demo
-    - $ gcloud container clusters list => Verify you see 'royal-cluster' at 'us-east4-c' location.
-    - $ gcloud container clusters get-credentials royal-cluster --zone=us-east4-c  => get the credentials for cluster
-  - Follow the 'Verify Istallation' steps to make sure it's configured properly. Also, do the following:
-    - $ kubectl get pods  => should show bookinfo pods as 'Running' (not in other state)
    
     
 # Deploying services to GKE and Istio
@@ -183,3 +165,93 @@ $ kubectl remove service profile-svc-v1
 
 ### ImagePullBackOff unauthorized issue
 If you see kubectl get pods give you a state of "ImagePullBackOff" and kubectl describe pod says "unauthorized - authentication required" it is because container registry API doesn't have right permissions. As a fast work-around, you can go to Container Registry in google console and make it 'public' anyone can read from it. 
+
+
+# Initial Project install / setup
+ 
+## Create a google project in google cloud
+  create a project named 'royal-2018-demo' in cloud web console. 
+  
+  Also setup your local shell gcloud to point at this new project: 
+  
+  ```
+  $ gcloud config set project royal-2018-demo
+  ```
+  
+## Setup container registry
+  Navigate to the project's Container Registry via google cloud console. Make sure it is enabled, or docker image pushes fail.
+  
+## Create GKE cluster (do this before adding istio)
+
+```
+// check gcloud settings are right (project, zone, etc.)
+gcloud config list
+
+// Create a new cluster named ‘royal-cluster’
+// IMPORTANT: must be 4 nodes minimum or the istio install won't work!!
+gcloud container clusters create royal-cluster --num-nodes=4
+
+// Get credentials to use new cluster
+gcloud container clusters get-credentials royal-cluster
+
+// make sure kubectl pointing at the new cluster
+kubectl config current-context
+
+// run a service, assumes you built the app and pushed it to google container registry first. listens on port 8082
+kubectl run profile-svc --image gcr.io/royal-2018-demo/profile-svc:1.0 --port 8082
+
+// expose service to external traffic
+kubectl expose deployment profile-svc --type LoadBalancer --port 80 --target-port 8082
+
+// check what external ip it used (e.g. 35.245.49.124 )
+ kubectl get services
+ 
+http://35.245.49.124/health
+```
+
+
+## install istio
+
+
+### Download istio from web into local machine for use
+```
+cd ~/Brian/metrics
+mkdir istio
+cd istio/
+curl -L https://git.io/getLatestIstio | sh -
+cd istio-1.0.4/
+export PATH=$PWD/bin:$PATH. 
+
+// IMPORTANT: enter this path into .bash_profile too!
+```
+### Initialize istio
+Installs base istio without any apps on it. 
+
+```
+kubectl apply -f install/kubernetes/helm/istio/templates/crds.yaml
+
+kubectl apply -f install/kubernetes/istio-demo.yaml
+
+// Verify installation, check stuff in istio-system namespace
+kubectl get svc -n istio-system
+kubectl get pods -n istio-system
+```
+
+
+## Check it all out in google cloud console
+
+XXX
+- Setup istio bookinfo sample for GKE following _all_ the steps: https://istio.io/docs/setup/kubernetes/quick-start-gke-dm/
+  - Make sure you do all the IAM stuff too or you will be sorry later!
+  - For the 'Launch Deployment Manager' section, when in the Istio GKE Deployment manager webapp do:
+    - Change the deployment name to 'royal-cluster'
+    - Change the cluster name from 'istio-cluster' to 'royal-cluster'
+    - Change the Zone to 'us-east4-c'
+    - Leave everything else same in web form and click the 'deploy' button.
+  - In the 'Bootstrap gcloud' section of instructions, do this instead:
+    - $ gcloud config set project royal-2018-demo
+    - $ gcloud container clusters list => Verify you see 'royal-cluster' at 'us-east4-c' location.
+    - $ gcloud container clusters get-credentials royal-cluster --zone=us-east4-c  => get the credentials for cluster
+  - Follow the 'Verify Istallation' steps to make sure it's configured properly. Also, do the following:
+    - $ kubectl get pods  => should show bookinfo pods as 'Running' (not in other state)
+ 
