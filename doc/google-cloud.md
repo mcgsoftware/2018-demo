@@ -103,6 +103,31 @@ $ gcloud container clusters get-credentials [CLUSTER_NAME]
     - $ kubectl get pods  => should show bookinfo pods as 'Running' (not in other state)
    
     
+# Deploying services to GKE and Istio
 
+## Deploy a service
+Build docker image locally, then push it to google's cloud 'Container Registry'. Once pushed to container registry, use kubectl to deploy it to GKE container. For example:
 
+```
+// compile sources
+$ go build rccldemo.com/service
 
+// Build in local docker repo. 
+$ docker build -t gcr.io/royal-2018-demo/profile-svc:1.0 .
+
+// Push docker image to Google's Container Registry
+$ docker push gcr.io/royal-2018-demo/profile-svc:1.0
+
+// Install into GKE 
+$ 
+```
+
+## Fixing deployment problems
+Use kubectl get pods and kubectl describe pod for debugging deployments.
+```
+// Will show your pods and what state they are in
+$ kubectl get pods   
+
+// Describe pod to get more details on deployment problems
+$ kubectl describe pod <pod_name_from_get_pods> 
+```
