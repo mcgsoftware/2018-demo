@@ -42,7 +42,12 @@ Send some traffic to productpage for metrics purposes:
 $ for i in {1..100}; do curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/productpage; done
 ```
 
+## Jaeger
 
+View jaeger tracing via: http://localhost:16686
+```
+$ kubectl port-forward -n istio-system $(kubectl get pod -n istio-system -l app=jaeger -o jsonpath='{.items[0].metadata.name}') 16686:16686 &
+```
 
 # GKE kubectl and other useful commands
 
