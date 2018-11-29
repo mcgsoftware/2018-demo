@@ -87,7 +87,7 @@ $ gcloud container clusters get-credentials [CLUSTER_NAME]
  
 - Create a project in google cloud: 'royal-2018-demo'
   - Also setup your local shell gcloud to point at this new project: $ gcloud config set project royal-2018-demo
-- Navigate to the project's Container Registry via google cloud console. Make sure it is enabled.
+- Navigate to the project's Container Registry via google cloud console. Make sure it is enabled, or docker image pushes fail.
 - Setup istio bookinfo sample for GKE following _all_ the steps: https://istio.io/docs/setup/kubernetes/quick-start-gke-dm/
   - Make sure you do all the IAM stuff too or you will be sorry later!
   - For the 'Launch Deployment Manager' section, when in the Istio GKE Deployment manager webapp do:
