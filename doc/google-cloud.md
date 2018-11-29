@@ -77,6 +77,12 @@ Display current kubectl's current cluster settings:
 ```
 $ kubectl config current-context
 ```
+
+Show gcloud's current settings (google project, zone, etc.)
+```
+$ gcloud config list
+```
+
 Set kubectl to point at a specific project and GKE cluster:
 ```
 $ gcloud config set project [PROJECT_NAME]
