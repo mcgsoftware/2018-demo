@@ -119,12 +119,12 @@ $ docker build -t gcr.io/royal-2018-demo/profile-svc:1.0 .
 $ docker push gcr.io/royal-2018-demo/profile-svc:1.0
 
 // Install into GKE 
-$ kubectl run profile-svc --image gcr.io/royal-2018-demo/profile-svc:1.0 --port 8080
+$ kubectl run profile-svc --image gcr.io/royal-2018-demo/profile-svc:1.0 --port 8082
 
 // Verify it installed
-$ kubectl get pos
+$ kubectl get pods
 
-// Create a kubernetes service to expose our service on port 8086, mapping from service's port 8082:
+// Create a kubernetes service to expose our service on port 80, mapping from service's port 8082:
 $ kubectl expose deployment profile-svc --type LoadBalancer --port 80 --target-port 8082
  
 // verify service creation worked. You should see external ip when it's ready to use
