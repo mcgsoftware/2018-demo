@@ -195,14 +195,15 @@ gcloud container clusters create royal-cluster \
     --no-enable-legacy-authorization
     
 // Get credentials to use new cluster
-gcloud container clusters get-credentials royal-cluster
+gcloud container clusters get-credentials royal-cluster --zone us-east4-c --project royal-2018-demo
 
 // make sure kubectl pointing at the new cluster
 kubectl config current-context
 
-kubectl create clusterrolebinding cluster-admin-binding \
+kubectl create clusterrolebinding root-cluster-admin-binding \
   --clusterrole=cluster-admin \
   --user="$(gcloud config get-value core/account)"
+
 
 ```
 
