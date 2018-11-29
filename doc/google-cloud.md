@@ -14,6 +14,18 @@ $ echo $GATEWAY_URL
 ```
 Now point browser at: http://$GATEWAY_URL/productpage
 
+## View grafana metrics
+Setup a tunnel to view grafana with, then point browser to: http://localhost:3000 
+```
+$ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=grafana -o jsonpath='{.items[0].metadata.name}') 3000:3000 &
+```
+
+Send some traffic to productpage for metrics purposes:
+```
+$ for i in {1..100}; do curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/productpage; done
+```
+
+
 # GKE kubectl and other useful commands
 
 
