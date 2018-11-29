@@ -159,14 +159,20 @@ $ kubectl get pods
 $ kubectl describe pod <pod_name_from_get_pods> 
 ```
 
-### Removing old or bad deployment
-To remove bad service deployments use the commands:
+### Removing old or bad microservice deployment
+To remove bad microservice deployments use the commands:
 ```
 // get list of current deployments
 $ kubectl get deployments 
 
-// remove deployment 'provile-svc'
+// remove deployment 'provile-svc' and it's pod
 $ kubectl delete deployment provile-svc
+
+// get service for deployment
+$ kubectl get services
+
+// remove service profile-svc-v1
+$ kubectl remove service profile-svc-v1
 ```
 
 ### ImagePullBackOff unauthorized issue
