@@ -188,14 +188,28 @@ If you see kubectl get pods give you a state of "ImagePullBackOff" and kubectl d
 gcloud config list
 
 // Create a new cluster named ‘royal-cluster’
-// IMPORTANT: must be 4 nodes minimum or the istio install won't work!!
-gcloud container clusters create royal-cluster --num-nodes=4
-
+// IMPORTANT: must be 4 standard nodes minimum or the istio install won't work!!
+gcloud container clusters create royal-cluster \
+    --machine-type=n1-standard-2 \
+    --num-nodes=4 \
+    --no-enable-legacy-authorization
+    
 // Get credentials to use new cluster
 gcloud container clusters get-credentials royal-cluster
 
 // make sure kubectl pointing at the new cluster
 kubectl config current-context
+
+kubectl create clusterrolebinding cluster-admin-binding \
+  --clusterrole=cluster-admin \
+  --user="$(gcloud config get-value core/account)"
+
+```
+
+### Try out GKE cluster
+
+Install a simple service, see it work.
+```
 
 // run a service, assumes you built the app and pushed it to google container registry first. listens on port 8082
 kubectl run profile-svc --image gcr.io/royal-2018-demo/profile-svc:1.0 --port 8082
@@ -207,13 +221,18 @@ kubectl expose deployment profile-svc --type LoadBalancer --port 80 --target-por
 kubectl get services
  
 http://35.245.49.124/health
+
+// clean-up
+kubectl delete deployment profile-svc
+kubectl delete service profile-svc
+
 ```
 
 
 ## install istio
 
 
-### Download istio from web into local machine for use
+### Download istio from internet into local machine for use
 ```
 cd ~/Brian/metrics
 mkdir istio
@@ -224,6 +243,7 @@ export PATH=$PWD/bin:$PATH.
 
 // IMPORTANT: enter this path into .bash_profile too!
 ```
+
 ### Install istio on GKE cluster
 Installs base istio without any apps on it. 
 
@@ -238,7 +258,10 @@ kubectl get pods -n istio-system
 ```
 
 
-## Check it all out in google cloud console
+### Check it all out in google cloud console
+Go to google cloud console click on cluster workload and services to make sure everything is Green!
+
+
 
 XXX
 - Setup istio bookinfo sample for GKE following _all_ the steps: https://istio.io/docs/setup/kubernetes/quick-start-gke-dm/
