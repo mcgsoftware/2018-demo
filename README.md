@@ -2,7 +2,7 @@
 Demo use of k8 and other technologies
 
 ## MySQL Notes
-Run schema.sql to generate database and data.sql to load it with sample data. 
+Run files in /mysql. schema.sql to generate database and data.sql to load it with sample data. 
 
 ## Todod
 foo
