@@ -131,3 +131,16 @@ $ kubectl get pods
 // Describe pod to get more details on deployment problems
 $ kubectl describe pod <pod_name_from_get_pods> 
 ```
+
+### Removing old or bad deployment
+To remove bad service deployments use the commands:
+```
+// get list of current deployments
+$ kubectl get deployments 
+
+// remove deployment 'provile-svc'
+$ kubectl delete deployment provile-svc
+```
+
+### ImagePullBackOff unauthorized issue
+If you see kubectl get pods give you a state of "ImagePullBackOff" and kubectl describe pod says "unauthorized - authentication required" it is because container registry API doesn't have right permissions. As a fast work-around, you can go to Container Registry in google console and make it 'public' anyone can read from it. 
