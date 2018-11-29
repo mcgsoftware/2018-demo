@@ -119,10 +119,37 @@ $ docker build -t gcr.io/royal-2018-demo/profile-svc:1.0 .
 $ docker push gcr.io/royal-2018-demo/profile-svc:1.0
 
 // Install into GKE 
-$ 
+$ kubectl run profile-svc --image gcr.io/royal-2018-demo/profile-svc:1.0 --port 8080
+
+// Verify it installed
+$ kubectl get pos
+
+// Create a kubernetes service to expose our service on port 8086, mapping from service's port 8082:
+$ kubectl expose deployment profile-svc --type LoadBalancer --port 80 --target-port 8082
+ 
+// verify service creation worked. You should see external ip when it's ready to use
+$ kubectl get services
+
+// Hit the external ip in POSTMAN or browser
+http://<external-ip>/health
+
 ```
 
-## Fixing deployment problems
+## View service logs 
+You can view logs from kubectl or StackDriver. For kubectl:
+```
+// Run get pods to get the pod name (e.g. profile-svc-7f4777597d-prn4g)
+$ kubectl get pods
+
+// View pod logs. We can look at istio's proxy or the deployment name
+$ kubectl logs profile-svc-7f4777597d-prn4g profile-svc
+
+$ kubectl logs profile-svc-7f4777597d-prn4g istio-proxy
+
+
+```
+
+## Trobleshooting deployment problems
 Use kubectl get pods and kubectl describe pod for debugging deployments.
 ```
 // Will show your pods and what state they are in
