@@ -204,7 +204,7 @@ kubectl run profile-svc --image gcr.io/royal-2018-demo/profile-svc:1.0 --port 80
 kubectl expose deployment profile-svc --type LoadBalancer --port 80 --target-port 8082
 
 // check what external ip it used (e.g. 35.245.49.124 )
- kubectl get services
+kubectl get services
  
 http://35.245.49.124/health
 ```
@@ -224,7 +224,7 @@ export PATH=$PWD/bin:$PATH.
 
 // IMPORTANT: enter this path into .bash_profile too!
 ```
-### Initialize istio
+### Install istio on GKE cluster
 Installs base istio without any apps on it. 
 
 ```
