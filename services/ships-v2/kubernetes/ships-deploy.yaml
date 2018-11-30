@@ -1,0 +1,35 @@
+##################################################################################################
+# ShipInfo service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: ships
+  labels:
+    app: ships
+spec:
+  type: NodePort
+  ports:
+    - port: 8070
+      name: http
+  selector:
+    app: ships
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ships-v2
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ships
+        version: v2
+    spec:
+      containers:
+        - name: ships
+          image: gcr.io/royal-2018-demo/ship-v2:1.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8070

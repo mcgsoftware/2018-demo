@@ -1,0 +1,35 @@
+##################################################################################################
+# Profile service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: profile
+  labels:
+    app: profile
+spec:
+  ports:
+    - port: 8082
+      name: http
+  selector:
+    app: profile
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: profile-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: profile
+        version: v1
+    spec:
+      containers:
+        - name: profile
+          image: gcr.io/royal-2018-demo/profile-svc:1.3
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8082
+---
