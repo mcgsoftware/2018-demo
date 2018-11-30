@@ -72,7 +72,7 @@ Show istio's gateway:
 $ kubectl get svc istio-ingressgateway -n istio-system
 ```
 
-## Special kubectl for GKE environment only
+## Special gcloud and kubectl for GKE environment only
 Display current kubectl's current cluster settings:
 ```
 $ kubectl config current-context
@@ -87,6 +87,12 @@ Set kubectl to point at a specific project and GKE cluster:
 ```
 $ gcloud config set project [PROJECT_NAME]
 $ gcloud container clusters get-credentials [CLUSTER_NAME]
+
+// Get credentials to use new cluster
+$ gcloud container clusters get-credentials royal-cluster --zone us-east4-c --project royal-2018-demo
+
+// make sure kubectl pointing at the new cluster
+kubectl config current-context
 ```
 
    
