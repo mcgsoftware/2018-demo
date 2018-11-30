@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8726652d-6652-4fd6-be62-12ab10f7c1ec" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/rccldemo.com/service/controllers/ships.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ships-v1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ships-v1/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,8 +43,8 @@
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="262">
-                <caret line="58" column="25" selection-start-line="58" selection-start-column="25" selection-end-line="58" selection-end-column="25" />
+              <first_editor relative-caret-position="247">
+                <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
               </first_editor>
               <second_editor />
             </state>
@@ -88,7 +88,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="519" />
     <option name="y" value="23" />
     <option name="width" value="1223" />
@@ -208,7 +208,7 @@
     </recent_temporary>
   </component>
   <component name="ToolWindowManager">
-    <frame x="519" y="23" width="1223" height="987" extended-state="0" />
+    <frame x="519" y="23" width="1223" height="987" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30906013" />
@@ -287,8 +287,8 @@
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="262">
-            <caret line="58" column="25" selection-start-line="58" selection-start-column="25" selection-end-line="58" selection-end-column="25" />
+          <first_editor relative-caret-position="247">
+            <caret line="57" lean-forward="true" selection-start-line="57" selection-end-line="57" />
           </first_editor>
           <second_editor />
         </state>

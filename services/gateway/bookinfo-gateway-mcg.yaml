@@ -43,3 +43,9 @@ spec:
     route:
     - destination:
         host: profile
+  - match:
+    - uri:
+        prefix: /royal/api/login
+    route:
+    - destination:
+        host: login

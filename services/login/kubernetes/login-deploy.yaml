@@ -1,0 +1,35 @@
+##################################################################################################
+# Login service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: login
+  labels:
+    app: login
+spec:
+  ports:
+  - port: 7000
+    name: http
+  selector:
+    app: login
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: login-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: login
+        version: v1
+    spec:
+      containers:
+      - name: login
+        image: gcr.io/royal-2018-demo/login:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 7000
+---
