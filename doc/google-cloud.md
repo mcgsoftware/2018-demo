@@ -166,17 +166,54 @@ $ kubectl remove service profile-svc-v1
 ### ImagePullBackOff unauthorized issue
 If you see kubectl get pods give you a state of "ImagePullBackOff" and kubectl describe pod says "unauthorized - authentication required" it is because container registry API doesn't have right permissions. As a fast work-around, you can go to Container Registry in google console and make it 'public' anyone can read from it. 
 
+# GKE Istio Install 
 
-# Initial Project install / setup
- 
+## Create a project
+
 ## Create a google project in google cloud
+
   create a project named 'royal-2018-demo' in cloud web console. 
   
   Also setup your local shell gcloud to point at this new project: 
   
   ```
   $ gcloud config set project royal-2018-demo
+  
+  // check gcloud settings are right (project, zone, etc.)
+  $ gcloud config list
   ```
+## Install Istio
+
+### Base install of Istio on GKE
+
+Follow instructions here https://istio.io/docs/setup/kubernetes/quick-start-gke-dm/
+use the Google Deployment Mangager. I spent hours trying to install isito manually and it didn't work on GKE.
+
+### Install bookinfo on local machine
+
+### Download istio from internet into local machine for use
+
+Install Istio from github onto local machine, it's needed for hacking the gateway config. 
+It also has istioctl for use later. IMPORTANT: Google deployment manager installs the automatic
+envoy injection so you don't need to wrapper microservice deployments with istioctl calls to
+decorate the yaml files. 
+
+```
+cd ~/Brian/metrics
+mkdir istio
+cd istio/
+curl -L https://git.io/getLatestIstio | sh -
+cd istio-1.0.4/
+export PATH=$PWD/bin:$PATH. 
+
+// IMPORTANT: enter this path into .bash_profile too!
+```
+
+
+#  =====
+# TODO: MOVE THIS TO MINIKUBE page - Initial Project install / setup
+#
+
   
 ## Setup container registry
   Navigate to the project's Container Registry via google cloud console. Make sure it is enabled, or docker image pushes fail.
@@ -228,6 +265,9 @@ kubectl delete deployment profile-svc
 kubectl delete service profile-svc
 
 ```
+
+
+
 
 
 ## install istio
