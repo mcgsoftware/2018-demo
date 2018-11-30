@@ -2,7 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6729a68f-2e71-48c5-948a-b80537b5685c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../login/.idea/login.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/kubernetes/login-deploy.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/src/main/java/com/rccl/service/HelloWorld.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/classes/com/rccl/service/HelloWorld.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/docker/image-id" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/docker/image-name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/docker/repository" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/docker/tag" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/login-1.0-docker-info.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/login-1.0-shaded.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/login-1.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/maven-archiver/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/test-classes/META-INF/docker/com.rccl.service/login/image-id" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/test-classes/META-INF/docker/com.rccl.service/login/image-name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/test-classes/META-INF/docker/com.rccl.service/login/repository" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/test-classes/META-INF/docker/com.rccl.service/login/tag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/bookinfo-gateway-mcg.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../gateway/bookinfo-gateway-mcg.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ships-v1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ships-v1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ships-v2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ships-v2/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kubernetes/profile-deploy.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="23" column="13" lean-forward="true" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+            <state relative-caret-position="285">
+              <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -57,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/app.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="25" column="61" selection-start-line="25" selection-start-column="61" selection-end-line="25" selection-end-column="61" />
+            <state relative-caret-position="346">
+              <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="81" />
             </state>
           </provider>
         </entry>
@@ -163,7 +188,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-81" />
+    <option name="x" value="46" />
     <option name="y" value="23" />
     <option name="width" value="1465" />
     <option name="height" value="987" />
@@ -310,7 +335,7 @@
     </recent_temporary>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-81" y="23" width="1465" height="987" extended-state="0" />
+    <frame x="46" y="23" width="1465" height="987" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" sideWeight="0.50166667" side_tool="true" weight="0.24957983" />
@@ -426,17 +451,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/app.go">
+    <entry file="file://$PROJECT_DIR$/kubernetes/profile-deploy.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="25" column="61" selection-start-line="25" selection-start-column="61" selection-end-line="25" selection-end-column="61" />
+        <state relative-caret-position="285">
+          <caret line="19" column="18" lean-forward="true" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kubernetes/profile-deploy.yaml">
+    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/app.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="23" column="13" lean-forward="true" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        <state relative-caret-position="346">
+          <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="81" />
         </state>
       </provider>
     </entry>

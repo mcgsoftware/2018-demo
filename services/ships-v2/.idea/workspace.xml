@@ -2,7 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8726652d-6652-4fd6-be62-12ab10f7c1ec" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../login/.idea/login.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/kubernetes/login-deploy.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/src/main/java/com/rccl/service/HelloWorld.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/classes/com/rccl/service/HelloWorld.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/docker/image-id" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/docker/image-name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/docker/repository" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/docker/tag" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/login-1.0-docker-info.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/login-1.0-shaded.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/login-1.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/maven-archiver/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/test-classes/META-INF/docker/com.rccl.service/login/image-id" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/test-classes/META-INF/docker/com.rccl.service/login/image-name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/test-classes/META-INF/docker/com.rccl.service/login/repository" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../login/target/test-classes/META-INF/docker/com.rccl.service/login/tag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gateway/bookinfo-gateway-mcg.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../gateway/bookinfo-gateway-mcg.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../profile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../profile/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ships-v1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ships-v1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

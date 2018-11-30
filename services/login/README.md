@@ -1,6 +1,15 @@
 # Login Service
 This is a Javalin com.rccl.service.
 
+## Usage
+
+POST http://<external-ip>/royal/api/login with HTML form username=sri and password=brian
+
+It returns json object with message of success or failure.
+
+
+GET http://<external-ip>/royal/api/login/health  returns health uptime
+
 ## Build Instructions
 
 ```
