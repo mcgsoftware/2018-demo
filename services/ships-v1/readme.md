@@ -6,6 +6,13 @@
 
 - open terminal in IDE
 ```
+
+mvn clean
+
+// build java artifacts first
+mvn package
+
+
 // Set the version we want to deploy
 export VER="1.0"
 
