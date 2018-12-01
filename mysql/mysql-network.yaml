@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: mysql-external
+spec:
+  hosts:
+  - sql9.freemysqlhosting.net
+  addresses:
+  - 52.5.226.201/32
+  ports:
+  - name: tcp
+    number: 3306
+    protocol: tcp
+  location: MESH_EXTERNAL

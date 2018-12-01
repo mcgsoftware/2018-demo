@@ -1,4 +1,6 @@
 create database demo;
+use demo;
+
 
 CREATE TABLE `reservations` (
   `resid` int(11) NOT NULL AUTO_INCREMENT,
