@@ -4,9 +4,11 @@
 The database connection to mysql won't work unless there is a 'serviceentry' created in Istio. The egress will fail.
 To install the service entry, do the following steps:
 
-1. Get the ip address for the mysql host
+1. Get the ip address for the mysql host and update the yaml file with it. 
 ```
    $ host sql9.freemysqlhosting.net
+
+   // Dont forget to edit yaml file with this ip address!
 ```
   
 2. Apply the mysql-network yaml file
