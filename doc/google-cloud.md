@@ -9,8 +9,9 @@ First, create a google project, download gcloud tools and create a cluster. Thei
 
 ## View the webapp
 ```
-$ export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-$ echo $GATEWAY_URL
+export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+
+echo $GATEWAY_URL
 ```
 Now point browser at: http://$GATEWAY_URL/productpage
 
@@ -19,7 +20,7 @@ Now point browser at: http://$GATEWAY_URL/productpage
 You can view istio's service graph via: http://localhost:8088/dotviz
 
 ```
-$ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=servicegraph -o jsonpath='{.items[0].metadata.name}') 8088:8088 &
+kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=servicegraph -o jsonpath='{.items[0].metadata.name}') 8088:8088 &
 ```
 
 
@@ -28,13 +29,23 @@ $ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=
 Show Prometheus via port-forward: http://localhost:9090/graph 
 Try http_requests_total as sample metric. See some prometheus metrics samples here: https://istio.io/docs/tasks/telemetry/querying-metrics/#about-the-prometheus-add-on
 ```
-$ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=prometheus -o jsonpath='{.items[0].metadata.name}') 9090:9090 &
+kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=prometheus -o jsonpath='{.items[0].metadata.name}') 9090:9090 &
 ```
+Total count of all requests to the productpage service:
+  istio_requests_total{destination_service="productpage.default.svc.cluster.local"}
+  
+Total count of all requests to v3 of the reviews service:
+   istio_requests_total{destination_service="reviews.default.svc.cluster.local", destination_version="v3"}
+   
+This query returns the current total count of all requests to the v3 of the reviews service.
+Rate of requests over the past 5 minutes to all instances of the productpage service:
+  rate(istio_requests_total{destination_service=~"productpage.*", response_code="200"}[1m])
+
 
 ## Grafana
 Setup a port-forward to view grafana with, then point browser to: http://localhost:3000 
 ```
-$ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=grafana -o jsonpath='{.items[0].metadata.name}') 3000:3000 &
+kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=grafana -o jsonpath='{.items[0].metadata.name}') 3000:3000 &
 ```
 
 Send some traffic to productpage for metrics purposes:
