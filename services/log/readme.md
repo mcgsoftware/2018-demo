@@ -29,9 +29,9 @@ export VER="1.2"
 
 go build rccldemo.com/service
 
-docker build -t gcr.io/royal-2018-demo/logger:1.0 .
+docker build -t gcr.io/royal-2018-demo/logger:$VER .
 
-docker push gcr.io/royal-2018-demo/logger:1.0
+docker push gcr.io/royal-2018-demo/logger:$VER
 
 ```
 
@@ -58,12 +58,16 @@ kubectl delete service logger
 // For Google GKE, it gets installed with automatic envoy proxy injector
 kubectl apply -f ./kubernetes/logger-deploy.yaml
 
+// View logs
+kubectl logs -l app=logger -c logger
+
+
 kubectl get pods
 
 // Test it out, port 8070 is port from profile service (and code)
 kubectl port-forward <pod_name> 8090:8090  
 
-// Point browser at: http://127.0.0.1:8070/royal/api/bookings/vdsId
+// Point browser at: http://127.0.0.1:8090/royal/api/bookings/vdsId
 
 ```
 

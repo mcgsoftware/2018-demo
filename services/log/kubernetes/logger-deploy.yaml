@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: logger
-          image: gcr.io/royal-2018-demo/logger:1.0
+          image: gcr.io/royal-2018-demo/logger:1.2
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8090

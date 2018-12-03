@@ -125,6 +125,23 @@ func (evt *ConfigInfo) ToJson() string {
 	return (string(jsonBytes))
 }
 
+//
+// ServiceMetric struct for log events
+//
+type ServiceMetricInfo struct {
+	Service     string                 `json:"service"`
+	Operation   string                 `json:"operation"`
+	Method      string      		   `json:"method"`
+	Latency     int64                  `json:"latency_ms"`  // latency in milliseconds
+	Status 		int                    `json:"status"`
+	Tags     	map[string]interface{} `json:"tags,omitempty"`
+	Context     map[string]interface{} `json:"context,omitempty"`
+}
+func (evt *ServiceMetricInfo) ToJson() string {
+	jsonBytes, _ := json.Marshal(&evt)
+	return (string(jsonBytes))
+}
+
 //=========================================
 // Event types
 //=========================================
@@ -135,7 +152,7 @@ func (evt *ConfigInfo) ToJson() string {
 //
 type ErrorEvent struct {
 	Base         Base         `json:"event"`
-	ServiceInfo  ServiceInfo  `json:"serviceInfo"`
+	ServiceInfo  ServiceInfo  `json:"service"`
 	ErrorInfo    ErrorInfo    `json:"error"`
 }
 func (evt *ErrorEvent) ToJson() string {
@@ -149,7 +166,7 @@ func (evt *ErrorEvent) ToJson() string {
 //
 type ConfigEvent struct {
 	Base         Base         `json:"event"`
-	ServiceInfo  ServiceInfo  `json:"serviceInfo"`
+	ServiceInfo  ServiceInfo  `json:"service"`
 	ConfigInfo   ConfigInfo   `json:"config"`
 }
 func (evt *ConfigEvent) ToJson() string {
@@ -157,3 +174,15 @@ func (evt *ConfigEvent) ToJson() string {
 	return (string(jsonBytes))
 }
 
+//
+// Service metric log event type
+//
+type ServiceMetricEvent struct {
+	Base         Base                 `json:"event"`
+	ServiceInfo  ServiceInfo          `json:"service"`
+	Metric       ServiceMetricInfo    `json:"metrics"`
+}
+func (evt *ServiceMetricEvent) ToJson() string {
+	jsonBytes, _ := json.Marshal(&evt)
+	return (string(jsonBytes))
+}

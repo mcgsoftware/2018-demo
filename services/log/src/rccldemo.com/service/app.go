@@ -3,27 +3,29 @@ package main
 import (
 	"fmt"
 	"github.com/gorilla/mux"
-	"log"
 	"net/http"
 	"os"
 	"rccldemo.com/service/controllers"
+	"rccldemo.com/service/helpers"
 	"time"
 )
 
 func main() {
 
-	port := os.Getenv("PORT")
-	if (port == "") {
-		log.Println("No PORT env set, using 8090");
-		port = "8090"
+	host := os.Getenv("HOST")
+	if (host == "") {
+		host = "127.0.0.1"   // Must be this or Istio wont work
 	}
 
-	// Important: Host must be localhost or this will never work in K8 with Istio proxy!!
-	// It will be impossible to kubectl port-forward or use gateway ingress to access the service.
-	host := "127.0.0.1"
+	port := os.Getenv("PORT")
+	if (port == "") {
+		port = "8090"
+	}
 	address := host + ":" + port
-	fmt.Printf("Running on http://%v/royal/api/logger \n", address)
-	fmt.Printf("Running on http://health \n", address)
+
+	sampleUrl := "POST http://" + address + "/royal/api/logger"
+	helpers.LogConfig(host, port, sampleUrl)
+
 
 
 	server := &http.Server{
@@ -40,12 +42,11 @@ func main() {
 	router.HandleFunc("/royal/api/logger", controllers.LogHandler)
 	router.HandleFunc("/health", controllers.HealthHandler)
 
-	/* These will not be accessible in the
-	router.HandleFunc("/health", controllers.HealthHandler)
-	router.HandleFunc("/getprof/{vdsId:[0-9]+}", controllers.FindReservationHandler)
-	*/
+
 	http.Handle("/", router)
 
 
-	log.Println(server.ListenAndServe())
+	if err := server.ListenAndServe(); err != nil {
+		fmt.Fprintln(os.Stderr, "Server error: %v", err)
+	}
 }

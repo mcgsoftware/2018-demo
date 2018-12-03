@@ -1,11 +1,10 @@
 package controllers
 
 import (
-	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"rccldemo.com/structlog"
+	"os"
 )
 
 //
@@ -16,7 +15,6 @@ func LogHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")  // Hack for web demo!
 
-
 	posted, err := ioutil.ReadAll(r.Body)
 	if (err != nil) || (len(posted) < 10) {
 		var nuErr error = fmt.Errorf("Error reading the body", err)
@@ -25,11 +23,11 @@ func LogHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Log the error
-	fmt.Println(string(posted))
+	// Log the error we just got to stderr
+	fmt.Fprintln(os.Stderr, string(posted))
 
 
-	// Return results to caller
+	// Return log event we got to caller so they know what we logged.
 	w.WriteHeader(http.StatusOK)
 	w.Write(posted)
 
@@ -38,6 +36,8 @@ func LogHandler(w http.ResponseWriter, r *http.Request) {
 //
 //  Handler for post log
 //
+
+/* NOT_USED parses input. Better for tightly checked logging.
 func ErrorLogHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
@@ -62,4 +62,5 @@ func ErrorLogHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 
 }
+*/
 
