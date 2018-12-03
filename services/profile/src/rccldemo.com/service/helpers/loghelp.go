@@ -8,11 +8,14 @@ import (
 
 var DefaultHost string = "unknown"
 
+const FEATURE = "Profile"
+const SERVICE = "profile"
+
 func DefaultSvcInfo() structlog.ServiceInfo {
 	return structlog.ServiceInfo{
-		Service: "profile",
+		Service: SERVICE,
 		Operation: "",
-		Version: "1.10",
+		Version: "1.1",
 		Host: "127.0.0.1",
 		DataCenter: "Cloud",
 		Cloud: "Google",
@@ -21,7 +24,7 @@ func DefaultSvcInfo() structlog.ServiceInfo {
 }
 
 
-func LogConfig(port string, shipInfoUri string, shipClassUri string) {
+func LogConfig(host string, port string, sampleUrl string) {
 
 
 
@@ -30,16 +33,16 @@ func LogConfig(port string, shipInfoUri string, shipClassUri string) {
 		TraceId: "",
 		VdsId: "",
 		DateTime: time.Now(),
-		Feature: "Profile",
+		Feature: FEATURE,
 	}
 
 	svcInfo := DefaultSvcInfo()
 
 	// Setup to log config properties
 	properties := make(map[string]interface{})
-	properties["PORT"] = port;
-	properties["CONTENT_SERVICE_SHIP_CLASS"] = shipClassUri
-	properties["CONTENT_SERVICE_SHIP_INFO"] = shipInfoUri
+	properties["port"] = port;
+	properties["host"] = host
+	properties["sample_url"] = sampleUrl
 
 
 
@@ -54,7 +57,7 @@ func LogConfig(port string, shipInfoUri string, shipClassUri string) {
 	}
 
 
-	structlog.GetLogger().Println(configEvt.ToJson())
+	fmt.Println(configEvt.ToJson())
 
 
 }
@@ -67,7 +70,7 @@ func LogError(vdsId string, traceId string, err error, errId string, errmsg stri
 		TraceId: traceId,
 		VdsId: vdsId,
 		DateTime: time.Now(),
-		Feature: "Reservations",
+		Feature: FEATURE,
 	}
 
 	svcInfo := DefaultSvcInfo()
@@ -91,7 +94,7 @@ func LogError(vdsId string, traceId string, err error, errId string, errmsg stri
 		ErrorInfo: errInfo,
 	}
 
-	structlog.GetLogger().Println(errEvent.ToJson())
+	fmt.Println(errEvent.ToJson())
 
 }
 
@@ -124,7 +127,7 @@ func LogServiceMetric(start time.Time, elapsedInMillis int64, vdsId string, trac
 		TraceId: traceId,
 		VdsId: vdsId,
 		DateTime: start,
-		Feature: "Profile",
+		Feature: FEATURE,
 	}
 
 	svcInfo := DefaultSvcInfo()

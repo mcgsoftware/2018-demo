@@ -2,60 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6729a68f-2e71-48c5-948a-b80537b5685c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../booking-v1/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../booking-v1/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../booking-v1/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../booking-v1/src/main/java/com/rccl/service/models/Reservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../doc/istio.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../doc/istio.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mysql/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../mysql/data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../mysql/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../mysql/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gateway/bookinfo-gateway-mcg.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../gateway/bookinfo-gateway-mcg.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-v2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-v2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-v2/kubernetes/booking-deploy.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-v2/kubernetes/booking-deploy.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-v2/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-v2/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-v2/src/rccldemo.com/service/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-v2/src/rccldemo.com/service/app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-v2/src/rccldemo.com/service/controllers/mysql.go" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-v2/src/rccldemo.com/service/controllers/mysql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-v2/src/rccldemo.com/service/helpers/loghelp.go" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-v2/src/rccldemo.com/service/helpers/loghelp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../booking-v2/src/rccldemo.com/structlog/datastruct.go" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-v2/src/rccldemo.com/structlog/datastruct.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../log/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../log/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../login/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../login/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kubernetes/profile-deploy.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/kubernetes/profile-deploy.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/rccldemo.com/service/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/rccldemo.com/service/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rccldemo.com/service/controllers/reservations.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rccldemo.com/service/controllers/ships.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/rccldemo.com/service/controllers/profile.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rccldemo.com/service/models/models.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/rccldemo.com/service/models/models.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rccldemo.com/service/remote/remote_calls.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/rccldemo.com/service/remote/remote_calls.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/.idea/sbt.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/kubernetes/ships-deploy.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/ships-v1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/src/main/java/com/rccl/service/App.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/src/main/java/com/rccl/service/controllers/ShipController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/src/main/java/com/rccl/service/models/ErrorResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/src/main/java/com/rccl/service/models/ServiceResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v1/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/.idea/ships-v2.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/kubernetes/ships-deploy.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/src/github.com/google/uuid" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/src/github.com/gorilla/mux" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/src/rccldemo.com/service/app.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/src/rccldemo.com/service/controllers/health.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/src/rccldemo.com/service/controllers/ships.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/src/rccldemo.com/service/helpers/headers.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ships-v2/src/rccldemo.com/service/models/models.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rccldemo.com/service/helpers/loghelp.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/rccldemo.com/service/helpers/loghelp.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,97 +25,80 @@
     <favorites_list name="profile" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="vertical" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/controllers/profile.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="18">
-                  <caret line="37" column="71" selection-start-line="37" selection-start-column="71" selection-end-line="37" selection-end-column="71" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/helpers/loghelp.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="85">
-                  <caret line="62" column="110" selection-start-line="62" selection-start-column="88" selection-end-line="62" selection-end-column="110" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/app.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="131">
-                  <caret line="51" selection-start-line="51" selection-end-line="51" />
-                  <folding>
-                    <element signature="e#14#126#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/remote/remote_calls.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="604">
-                  <caret line="53" column="43" selection-start-line="53" selection-start-column="43" selection-end-line="53" selection-end-column="43" />
-                  <folding>
-                    <element signature="e#16#72#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/rccldemo.com/structlog/datastruct.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="204">
-                  <caret line="137" column="53" selection-start-line="137" selection-start-column="53" selection-end-line="137" selection-end-column="53" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/kubernetes/profile-deploy.yaml">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="99">
-                  <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/rccldemo.com/structlog/datastruct.go">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1910">
-                  <caret line="134" column="39" selection-start-line="134" selection-start-column="39" selection-end-line="134" selection-end-column="39" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/readme.md">
-              <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-                <state split_layout="SPLIT">
-                  <first_editor relative-caret-position="175">
-                    <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
-                  </first_editor>
-                  <second_editor />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/controllers/profile.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="412">
+              <caret line="37" selection-start-line="37" selection-end-line="39" selection-end-column="90" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/helpers/loghelp.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="589">
+              <caret line="121" lean-forward="true" selection-start-line="121" selection-end-line="121" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/app.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="23" column="23" lean-forward="true" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+              <folding>
+                <element signature="e#14#126#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/remote/remote_calls.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="604">
+              <caret line="53" column="43" selection-start-line="53" selection-start-column="43" selection-end-line="53" selection-end-column="43" />
+              <folding>
+                <element signature="e#16#72#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/rccldemo.com/structlog/datastruct.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="759">
+              <caret line="137" column="53" selection-start-line="137" selection-start-column="53" selection-end-line="137" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/kubernetes/profile-deploy.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/readme.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="274">
+                <caret line="71" selection-start-line="71" selection-end-line="72" selection-end-column="38" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -197,17 +138,17 @@
         <option value="$PROJECT_DIR$/src/rccldemo.com/service/controllers/mysql.go" />
         <option value="$PROJECT_DIR$/src/rccldemo.com/service/models/models.go" />
         <option value="$PROJECT_DIR$/src/rccldemo.com/service/remote/remote_calls.go" />
-        <option value="$PROJECT_DIR$/src/rccldemo.com/service/app.go" />
         <option value="$PROJECT_DIR$/src/rccldemo.com/structlog/datastruct.go" />
-        <option value="$PROJECT_DIR$/src/rccldemo.com/service/helpers/loghelp.go" />
         <option value="$PROJECT_DIR$/src/rccldemo.com/service/controllers/profile.go" />
         <option value="$PROJECT_DIR$/kubernetes/profile-deploy.yaml" />
         <option value="$PROJECT_DIR$/readme.md" />
+        <option value="$PROJECT_DIR$/src/rccldemo.com/service/app.go" />
+        <option value="$PROJECT_DIR$/src/rccldemo.com/service/helpers/loghelp.go" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="25" />
+    <option name="x" value="-53" />
     <option name="y" value="23" />
     <option name="width" value="1273" />
     <option name="height" value="987" />
@@ -352,7 +293,7 @@
     </recent_temporary>
   </component>
   <component name="ToolWindowManager">
-    <frame x="25" y="23" width="1273" height="987" extended-state="0" />
+    <frame x="-53" y="23" width="1273" height="987" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49833333" visible="true" weight="0.25264013" />
@@ -368,7 +309,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32960895" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32960895" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -455,16 +396,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/app.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
-          <folding>
-            <element signature="e#14#126#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/remote/remote_calls.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="604">
@@ -475,44 +406,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/structlog/datastruct.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1910">
-          <caret line="134" column="39" selection-start-line="134" selection-start-column="39" selection-end-line="134" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rccldemo.com/structlog/logutil.go">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/helpers/loghelp.go">
+    <entry file="file://$PROJECT_DIR$/profile.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="62" column="110" selection-start-line="62" selection-start-column="88" selection-end-line="62" selection-end-column="110" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/controllers/profile.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="37" column="71" selection-start-line="37" selection-start-column="71" selection-end-line="37" selection-end-column="71" />
+        <state relative-caret-position="15">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/kubernetes/profile-deploy.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
+        <state relative-caret-position="114">
+          <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/controllers/profile.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="37" selection-start-line="37" selection-end-line="39" selection-end-column="90" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="175">
-            <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
+          <first_editor relative-caret-position="274">
+            <caret line="71" selection-start-line="71" selection-end-line="72" selection-end-column="38" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/structlog/datastruct.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="759">
+          <caret line="137" column="53" selection-start-line="137" selection-start-column="53" selection-end-line="137" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/app.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="23" column="23" lean-forward="true" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+          <folding>
+            <element signature="e#14#126#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/helpers/loghelp.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="121" lean-forward="true" selection-start-line="121" selection-end-line="121" />
         </state>
       </provider>
     </entry>

@@ -23,8 +23,8 @@ func main() {
 	// It will be impossible to kubectl port-forward or use gateway ingress to access the service.
 	host := "127.0.0.1"
 	address := host + ":" + port
-	fmt.Printf("Running on http://127.0.0.1:8082/royal/api/profile/bjm100\n")
-	fmt.Printf("http://127.0.0.1:8082/royal/api/profile/mysql/vdsId - call mysql directly\n", address)
+	fmt.Printf("Running on http://%v/royal/api/profile/bjm100\n", address)
+	fmt.Printf("http://%v/royal/api/profile/mysql/vdsId - call mysql directly\n", address)
 
 	server := &http.Server{
 		Addr:         address,
