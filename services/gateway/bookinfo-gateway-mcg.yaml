@@ -49,3 +49,16 @@ spec:
     route:
     - destination:
         host: login
+  - match:
+    - uri:
+        prefix: /royal/api/booking
+    route:
+    - destination:
+        host: booking
+  - match:
+    - uri:
+        prefix: /royal/api/logger
+    route:
+    - destination:
+        host: logger
+

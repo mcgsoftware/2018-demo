@@ -3,6 +3,11 @@
 ## General
 Profile service is written in Go and uses minimal dependencies.
 
+## Istio MySQL egress issue
+By default, Istio will block calls to mysql hosted elsewhere.
+To fix this, follow the steps in mysql readme to punch a hole in
+cluster for mysql access. 
+
 ## Istio Gateway Issues
 
 Istio's bookinfo demo specifies a path matching for gateway ingress.
@@ -22,13 +27,16 @@ that out.
 ### Build docker image from $GOPATH and upload to google repository:
 ```
 // Set the version we want to deploy
-export VER="1.3"
+export VER="1.18"
 
+go build rccldemo.com/service
 go install rccldemo.com/service
 
 docker build -t gcr.io/royal-2018-demo/profile-svc:$VER .
 
 docker push gcr.io/royal-2018-demo/profile-svc:$VER
+
+
 
 ```
 
@@ -48,15 +56,31 @@ This installs service into GKE and Istio.
 // For minikube, need to do this to inject the envoy proxy during deployment
 istioctl kube-inject -f ./kubernetes/profile-deploy.yaml | kubectl apply -f -
 
+// Delete old profile service and pods
+kubectl delete deployment profile-v1 
+kubectl delete service profile
+
+
 // For Google GKE, it gets installed with automatic envoy proxy injector
 kubectl apply -f ./kubernetes/profile-deploy.yaml
 
-kubectl get pods
+
+
+Try it out in Postman - GET: 
+http://35.245.49.124/royal/api/profile/bjm100
+
+// Look at log output
+kubectl logs -l app=profile -c profile
+
 
 // Test it out, port 8082 is port from profile service (and code)
+kubectl get pods
 kubectl port-forward <pod_name> 8082:8082  
 
-// Point browser at: 27.0.0.1:8082/royal/api/profile/233
+// Point browser at: 127.0.0.1:8082/royal/api/profile/233
+// and 
+
+
 
 ```
 
@@ -124,6 +148,7 @@ $ go install rccldemo.com/service
 ```
  $ go get -t github.com/google/uuid
  $ go get -t github.com/gorilla/mux
+ $ go get -t github.com/go-sql-driver/mysql
 
 ```
 

@@ -1,0 +1,35 @@
+##################################################################################################
+# Booking Go service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: logger
+  labels:
+    app: logger
+spec:
+  type: NodePort
+  ports:
+    - port: 8090
+      name: http
+  selector:
+    app: logger
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: logger-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: logger
+        version: v1
+    spec:
+      containers:
+        - name: logger
+          image: gcr.io/royal-2018-demo/logger:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8090

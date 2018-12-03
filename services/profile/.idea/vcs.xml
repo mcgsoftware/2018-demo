@@ -4,6 +4,7 @@
     <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
     <mapping directory="$PROJECT_DIR$/pkg/src/github.com/google/uuid" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/pkg/src/github.com/gorilla/mux" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/go-sql-driver/mysql" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/github.com/google/uuid" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/github.com/gorilla/mux" vcs="Git" />
   </component>

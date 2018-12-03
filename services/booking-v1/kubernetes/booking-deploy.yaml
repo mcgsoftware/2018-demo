@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: booking
+  labels:
+    app: booking
+spec:
+  type: NodePort
+  ports:
+  - port: 8070
+    name: http
+  selector:
+    app: booking
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: booking-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: booking
+        version: v1
+    spec:
+      containers:
+      - name: booking
+        image: gcr.io/royal-2018-demo/booking-v1:1.5
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8070

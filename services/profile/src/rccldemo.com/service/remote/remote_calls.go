@@ -4,17 +4,16 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"os"
 	"time"
 )
 
 
 
 
-
-const K8_SHIP_SERVICE_NAME = "ships"
+// http://35.245.49.124/royal/api/bookings/bjm100
+const K8_SHIP_SERVICE_NAME = "booking"
 const K8_SHIP_SERVICE_PORT = "8070"
-var RemoteServiceUri string = "http://" + K8_SHIP_SERVICE_NAME + ":" + K8_SHIP_SERVICE_PORT + "/royal/api/ships/AL"
+var RemoteServiceUri string = "http://" + K8_SHIP_SERVICE_NAME + ":" + K8_SHIP_SERVICE_PORT + "/royal/api/bookings/"
 
 // var LocalServiceUri string = "http://127.0.0.1:8072/royal/api/ships/AL"
 
@@ -22,7 +21,11 @@ var RemoteServiceUri string = "http://" + K8_SHIP_SERVICE_NAME + ":" + K8_SHIP_S
 //
 // Fetches data from remote
 //
-func CallRemoteShips() (string, error) {
+func CallRemoteBookingService( vdsId string) ([]byte, error) {
+
+
+	// Log service metric for remote service call
+	//defer helpers.LogServiceMetric(time.Now(), vdsId, traceId , service, operation, method, status )
 
 	timeout := time.Duration(5 * time.Second)
 	client := http.Client{
@@ -30,10 +33,10 @@ func CallRemoteShips() (string, error) {
 	}
 
 	// uri := LocalServiceUri
-	uri := RemoteServiceUri
+	uri := RemoteServiceUri + vdsId
 	req, err := http.NewRequest("GET", uri, nil)
 	if (err != nil) {
-		return "Problem!", err
+		return []byte("Problem!"), err
 	}
 
 	// set headers required by remote service
@@ -43,32 +46,25 @@ func CallRemoteShips() (string, error) {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		return"Problem!", fmt.Errorf("Remote service call to Content Service failed: %s. Error: ", uri, err)
+		return []byte("Problem!"), fmt.Errorf("Remote service call to Content Service failed: %s. Error: ", uri, err)
 	}
 	defer resp.Body.Close()
 
 	// Parse data from remote service
 	if (resp.StatusCode != http.StatusOK) {
-		//var result map[string]interface{}
-		//json.NewDecoder(resp.Body).Decode(&result)
-		return "Problem!", fmt.Errorf("Failure from remote service. StatusCode=%v, body=%v", resp.StatusCode, "none")
+		return []byte("Problem!"), fmt.Errorf("Failure from remote service. StatusCode=%v, body=%v", resp.StatusCode, "none")
 	}
 
 	// read response as html
-	htmlData, err := ioutil.ReadAll(resp.Body)
+	responseData, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println(err)
-		return"Problem!", fmt.Errorf("Remote service call to Content Service failed: %s. Error: ", uri, err)
+		return []byte("Problem!"), fmt.Errorf("Remote service call to Content Service failed: %s. Error: ", uri, err)
 	}
 
-	// print out
-	fmt.Println(os.Stdout, string(htmlData))
+	// debug out
+	//fmt.Println(os.Stdout, string(responseData))
 
-	//var result models.ShipInfo
-	//json.NewDecoder(resp.Body).Decode(&result)
 
-	//log.Println("Found: ", result)
-
-	return string(htmlData), nil
+	return responseData, nil
 
 }
