@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: booking
-          image: gcr.io/royal-2018-demo/booking-v2:1.2
+          image: gcr.io/royal-2018-demo/booking-v2:1.5
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8070

@@ -25,13 +25,13 @@ that out.
 $ export GOPATH=`pwd`
 
 // Set the version we want to deploy
-export VER="1.2"
+export VER="1.5"
 
-go build rccldemo.com/service
+go install rccldemo.com/service
 
-docker build -t gcr.io/royal-2018-demo/booking-v2:1.2 .
+docker build -t gcr.io/royal-2018-demo/booking-v2:$VER .
 
-docker push gcr.io/royal-2018-demo/booking-v2:1.2
+docker push gcr.io/royal-2018-demo/booking-v2:$VER
 
 ```
 
@@ -58,7 +58,11 @@ kubectl delete service booking
 // For Google GKE, it gets installed with automatic envoy proxy injector
 kubectl apply -f ./kubernetes/booking-deploy.yaml
 
+
+
+
 kubectl get pods
+kubectl logs <pod-name> -c booking
 
 // Test it out, port 8070 is port from profile service (and code)
 kubectl port-forward <pod_name> 8070:8070  

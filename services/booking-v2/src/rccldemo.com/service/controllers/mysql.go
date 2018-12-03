@@ -7,10 +7,13 @@ import (
 	_ "github.com/go-sql-driver/mysql" // must do or will get a runtime error when connecting to mysql!
 	"github.com/gorilla/mux"
 	"net/http"
+	"rccldemo.com/service/helpers"
 	"rccldemo.com/service/models"
 	"time"
 )
 
+
+const sql_query = "select r.vdsid, r.shipcode, s.name, r.saildate, s.class from reservations r, ships s where r.shipcode = s.shipcode AND vdsid = ?"
 
 
 //
@@ -46,7 +49,7 @@ Port number: 3306
 
 	//user:password@tcp(localhost:5555)/dbname?charset=utf8
 
-	fmt.Println("connecting to mysql: ", connStr)
+	// fmt.Println("connecting to mysql: ", connStr)
 
 	db, err := sql.Open(dbDriver, connStr)
 
@@ -77,15 +80,15 @@ func getReservations(vdsId string) ([]models.Reservation, error) {
 	db := connect()
 	defer db.Close()
 
-	const sql = "select r.vdsid, r.shipcode, s.name, r.saildate, s.class from reservations r, ships s where r.shipcode = s.shipcode AND vdsid = ?"
+	//const sql = "select r.vdsid, r.shipcode, s.name, r.saildate, s.class from reservations r, ships s where r.shipcode = s.shipcode AND vdsid = ?"
 
 	//const sql = "SELECT resid, vdsid, shipcode, saildate FROM reservations where vdsid = ?"
-	fmt.Println("SQL: ", sql, "vdsId = ", vdsId)
+	//fmt.Println("SQL: ", sql_query, "vdsId = ", vdsId)
 
-	query, err := db.Query(sql, vdsId)
+	query, err := db.Query(sql_query, vdsId)
 	if err != nil {
 		// make sure to return the sql statement to caller via error stack so it's logged.
-		return nil, fmt.Errorf("MySQL query failed: %s. Error: ", sql, err)
+		return nil, fmt.Errorf("MySQL query failed: %s. Error: ", sql_query, err)
 	}
 
 
@@ -136,17 +139,33 @@ func FindReservationMySqlHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")  // Hack for web demo!
 
+	start := time.Now()
+	logCxt := map[string]interface{}{ "sql" : sql_query, "vdsId" : vdsId }
+	const traceId = "abcd1234"
+	const service = "MySQL"
+	const operation = "query"
+	const method = "Sql"
+
 
 	reservations, err := getReservations(vdsId)
 	if err != nil {
-		fmt.Println("ERROR!")
-		fmt.Println(err)
 		w.Header().Set("Content-Type", "text/html")
 		w.WriteHeader(http.StatusInternalServerError)
 		msg := fmt.Sprintf("<html><body>Error: %v</body></html>", err)
 		w.Write([]byte(msg))
+
+		// Log the latency, even though an error calling mysql
+		defer helpers.LogServiceMetric(start, helpers.GetElapsed(start), vdsId,
+			traceId , service, operation, method, http.StatusInternalServerError, logCxt )
+
 		return
+	} else {
+		// Log the latency, note success calling mysql
+		defer helpers.LogServiceMetric(start, helpers.GetElapsed(start), vdsId,
+			traceId , service, operation, method, http.StatusOK, logCxt )
 	}
+
+
 
 	if (len(reservations) < 1) {
 		w.WriteHeader(http.StatusNotFound)
@@ -160,7 +179,6 @@ func FindReservationMySqlHandler(w http.ResponseWriter, r *http.Request) {
 	// Return results to caller
 	w.WriteHeader(http.StatusOK)
 	json, _ := json.Marshal(reservations)
-	fmt.Println(string(json))
 	w.Write(json)
 
 
