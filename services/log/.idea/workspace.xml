@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b52b050f-bf37-46d4-92bf-72f32d960e3c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../reactjs/learn/mcg-app/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../reactjs/learn/mcg-app/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reactjs/learn/mcg-app/src/RoyalLog.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../reactjs/learn/mcg-app/src/RoyalLog.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../booking-v2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../booking-v2/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kubernetes/logger-deploy.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/kubernetes/logger-deploy.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service" beforeDir="false" afterPath="$PROJECT_DIR$/service" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rccldemo.com/service/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/rccldemo.com/service/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rccldemo.com/service/controllers/log_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/rccldemo.com/service/controllers/log_controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rccldemo.com/service/helpers/loghelp.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/rccldemo.com/service/helpers/loghelp.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rccldemo.com/structlog/datastruct.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/rccldemo.com/structlog/datastruct.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../login/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../login/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../profile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../profile/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../profile/src/rccldemo.com/service/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/../profile/src/rccldemo.com/service/app.go" afterDir="false" />
@@ -26,13 +21,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/app.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
+            <state relative-caret-position="197">
               <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/rccldemo.com/structlog/datastruct.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-320">
+              <caret line="135" column="15" selection-start-line="135" selection-start-column="5" selection-end-line="135" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -101,7 +105,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="259" />
+    <option name="x" value="48" />
     <option name="y" value="23" />
     <option name="width" value="1121" />
     <option name="height" value="987" />
@@ -223,10 +227,9 @@
     </recent_temporary>
   </component>
   <component name="ToolWindowManager">
-    <frame x="259" y="23" width="1121" height="987" extended-state="0" />
-    <editor active="true" />
+    <frame x="48" y="23" width="1121" height="987" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" side_tool="true" visible="true" weight="0.27988878" />
+      <window_info content_ui="combo" id="Project" order="0" side_tool="true" visible="true" weight="0.27988878" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -239,7 +242,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32960895" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32960895" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -275,20 +278,6 @@
     <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/models/models.go">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/structlog/datastruct.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="802">
-          <caret line="135" column="15" selection-start-line="135" selection-start-column="5" selection-end-line="135" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/app.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/controllers/log_controller.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -310,6 +299,20 @@
             <caret line="69" column="41" selection-start-line="69" selection-start-column="41" selection-end-line="69" selection-end-column="41" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/service/app.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/rccldemo.com/structlog/datastruct.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-320">
+          <caret line="135" column="15" selection-start-line="135" selection-start-column="5" selection-end-line="135" selection-end-column="12" />
         </state>
       </provider>
     </entry>

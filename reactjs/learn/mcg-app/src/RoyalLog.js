@@ -14,11 +14,7 @@ export class Base {
         this.feature = feature
     }
 
-    static factoryError(traceId, vdsId) {
-        const base = new Base("Error", traceId, vdsId, 
-          new Date().toISOString(), 'profile')
-        return base
-    }
+    
 }
 
 export class AppInfo {
@@ -36,11 +32,27 @@ export class AppInfo {
         this.datacenter = datacenter
     }
 
-     static factory() {
-         let ai = new AppInfo("ReactDemo", "web", "1.0", "chrome", "GCP")
-         return ai
-     }
+     
 }
+
+export class ServiceMetricInfo {
+    constructor(
+        service,
+        operation,
+        method,
+        latency_ms,
+        tags, 
+        context
+    ) {
+        this.service = service
+        this.operation = operation
+        this.method = method
+        this.latency_ms = latency_ms
+        this.tags = tags
+        this.context = context
+    }
+}
+
 
 export class ErrorInfo {
     constructor(
@@ -73,5 +85,17 @@ export class ErrorEvent {
         this.event = event
         this.appInfo = appInfo
         this.error = error 
+    }
+}
+
+export class ServiceMetricEvent {
+    constructor(
+        event,      // Base 
+        app,        // AppInfo
+        metrics     // ServiceMetricInfo
+    ) {
+        this.event = event
+        this.app = app
+        this.metrics = metrics  
     }
 }

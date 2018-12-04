@@ -4,7 +4,7 @@ import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
 import './RoyalLog.js'
-import { Base, AppInfo, ErrorInfo, ErrorEvent } from './RoyalLog.js';
+import { Base, AppInfo, ErrorInfo, ErrorEvent, ServiceMetricInfo, ServiceMetricEvent } from './RoyalLog.js';
 
 // Helper for logging
 class Logger {
@@ -61,6 +61,7 @@ class ReservationForm extends React.Component {
     */
     let uri = "http://35.245.49.124/royal/api/profile/"
     let url = uri + vdsId
+    let start = Date.now()
     axios({
       url: url,
       method: 'get',
@@ -74,8 +75,20 @@ class ReservationForm extends React.Component {
         this.setState({loaded: true})
 
         console.log(profile)
- 
-       
+
+        var latency = Date.now() - start;
+        let metric = new ServiceMetricInfo(
+          "booking", "bookings", "GET", latency, 
+          null, { vdsId: vdsId}
+        )
+
+        let logEvent = new ServiceMetricEvent(
+          Logger.factoryBaseError( "abcd120", vdsId),
+          Logger.factoryApp(),
+          metric)
+        
+        // send log event to server for Splunk
+        Logger.remoteLog(logEvent)
         
         
 

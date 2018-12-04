@@ -6,25 +6,26 @@ import (
 	"net/http"
 	"os"
 	"rccldemo.com/service/controllers"
+	"rccldemo.com/service/helpers"
 	"time"
 )
 
 func main() {
 
-
+	host := os.Getenv("HOST")
+	if (host == "") {
+		host = "127.0.0.1"   // Must be this or Istio wont work
+	}
 
 	port := os.Getenv("PORT")
 	if (port == "") {
-		fmt.Println("No PORT env set, using 8082");
 		port = "8082"
 	}
-
-	// Important: Host must be localhost or this will never work in K8 with Istio proxy!!
-	// It will be impossible to kubectl port-forward or use gateway ingress to access the service.
-	host := "127.0.0.1"
 	address := host + ":" + port
-	fmt.Printf("Running on http://%v/royal/api/profile/bjm100\n", address)
-	fmt.Printf("http://%v/royal/api/profile/mysql/vdsId - call mysql directly\n", address)
+
+	sampleUrl := "http://" + address + "/royal/api/profile/bjm100"
+	helpers.LogConfig(host, port, sampleUrl)
+
 
 	server := &http.Server{
 		Addr:         address,

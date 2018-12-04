@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"rccldemo.com/service/helpers"
 	"time"
 )
 
@@ -21,7 +22,7 @@ var RemoteServiceUri string = "http://" + K8_SHIP_SERVICE_NAME + ":" + K8_SHIP_S
 //
 // Fetches data from remote
 //
-func CallRemoteBookingService( vdsId string) ([]byte, error) {
+func CallRemoteBookingService(traceInfo *helpers.TraceHeaders, vdsId string) ([]byte, error) {
 
 
 	// Log service metric for remote service call
@@ -32,6 +33,8 @@ func CallRemoteBookingService( vdsId string) ([]byte, error) {
 		Timeout: timeout,
 	}
 
+
+
 	// uri := LocalServiceUri
 	uri := RemoteServiceUri + vdsId
 	req, err := http.NewRequest("GET", uri, nil)
@@ -39,9 +42,14 @@ func CallRemoteBookingService( vdsId string) ([]byte, error) {
 		return []byte("Problem!"), err
 	}
 
-	// set headers required by remote service
-	//req.Header.Set(helpers.TRACE_ID_HEADER, traceId)
-	//req.Header.Set(helpers.VDSID_HEADER, vdsId )
+	// Set headers to propagate trace for Jaeger
+	if traceInfo != nil {
+		traceInfo.SetHeaders(req)
+	}
+
+
+	// set OTHER headers used by remote service
+	req.Header.Set(helpers.VDSID_HEADER, vdsId )
 
 
 	resp, err := client.Do(req)

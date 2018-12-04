@@ -19,6 +19,8 @@ func CallServiceHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")  // Hack for web demo!
 
+
+
 	start := time.Now()
 	logCxt := map[string]interface{}{ "vdsId" : vdsId }
 	const traceId = "abcd1234"
@@ -26,7 +28,10 @@ func CallServiceHandler(w http.ResponseWriter, r *http.Request) {
 	const operation = "bookings"
 	const method = "GET"
 
-	data, err := remote.CallRemoteBookingService(vdsId)
+	// Get tracing headers for Jaeger to ses spans without breaking between services.
+	var traceHdrInfo *helpers.TraceHeaders = helpers.BuildFromRequestHeader(r)
+
+	data, err := remote.CallRemoteBookingService(traceHdrInfo, vdsId)
 	if err != nil {
 		fmt.Println("ERROR!")
 		fmt.Println(err)

@@ -27,7 +27,7 @@ that out.
 ### Build docker image from $GOPATH and upload to google repository:
 ```
 // Set the version we want to deploy
-export VER="1.18"
+export VER="1.20"
 
 go build rccldemo.com/service
 go install rccldemo.com/service

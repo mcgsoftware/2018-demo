@@ -2,6 +2,7 @@ package helpers
 
 import (
 	"github.com/google/uuid"
+	"net/http"
 	"strings"
 )
 
@@ -21,3 +22,28 @@ func GenerateTraceId() string {
 
 }
 
+//
+// Copies tracing headers received from caller to outgoing response.
+// This is for service to service calls. Otherwise, traces break at each
+// service in the call chain.
+//
+func CopyTracingHeaders(w http.ResponseWriter, r *http.Request) {
+
+	// List of trace related headers
+	headers := [...]string{
+		"x-request-id",
+		"x-b3-traceid",
+		"x-b3-spanid",
+		"x-b3-parentspanid",
+		"x-b3-sampled",
+		"x-b3-flags",
+		"x-ot-span-context",
+	}
+
+	// Iterate over all trace related headers. If request has them, copy header to response.
+	for _, headerKey := range headers {
+		if headerValue := r.Header.Get(headerKey); headerValue != "" {
+			w.Header().Set(headerKey, headerValue)
+		}
+	}
+}
