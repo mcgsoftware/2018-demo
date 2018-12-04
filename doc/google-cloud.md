@@ -60,6 +60,36 @@ View jaeger tracing via: http://localhost:16686
 $ kubectl port-forward -n istio-system $(kubectl get pod -n istio-system -l app=jaeger -o jsonpath='{.items[0].metadata.name}') 16686:16686 &
 ```
 
+## Kiali
+
+### Install
+
+Follow Kubernetes install instructions here: https://www.kiali.io/gettingstarted/
+Except the following:
+- Extrace all the curl commands from instructions and download the 3 yaml file separatedly.
+- Manually edit each yaml file making substitutions per the the intentions of instructions. 
+- Apply the 3 modified yaml files to 'istio-system' namespace in kubernetes: apply -f fn.yaml -n istio-system
+
+### Run Kiali
+
+Run this in shell:
+
+```
+Goto google GKE console. Click into 'kiali' under "workloads".
+In the workloads > Deployment Details view, find the "Ingress" endpoint. 
+Point browser at endpoint:
+
+http://35.244.168.207/
+
+Log in to Kiali-UI as admin/admin.
+
+```
+
+
+
+
+
+
 # GKE kubectl and other useful commands
 
 
