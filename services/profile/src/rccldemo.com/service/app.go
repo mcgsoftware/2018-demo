@@ -38,7 +38,6 @@ func main() {
 	// HACK: Due to Istio's ingress gateway, we have to prepend a path that will match in the
 	// bookinfo gateway config file: 'bookinfo-gateway-mcg.yaml'.
 	router := mux.NewRouter()
-	router.HandleFunc("/royal/api/profile/mysql/{vdsId}", controllers.FindReservationMySqlHandler)
 	router.HandleFunc("/royal/api/profile/{vdsId}", controllers.CallServiceHandler)
 	router.HandleFunc("/royal/api/profile/health", controllers.HealthHandler)
 

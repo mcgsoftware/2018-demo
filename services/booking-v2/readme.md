@@ -3,6 +3,11 @@
 ## General
 Profile service is written in Go and uses minimal dependencies.
 
+## Istio MySQL egress issue
+By default, Istio will block calls to mysql hosted elsewhere.
+To fix this, follow the steps in mysql readme to punch a hole in
+cluster for mysql access. 
+
 ## Istio Gateway Issues
 
 Istio's bookinfo demo specifies a path matching for gateway ingress.
@@ -61,7 +66,7 @@ kubectl apply -f ./kubernetes/booking-deploy.yaml
 
 
 
-kubectl get pods
+kubectl get pods -l app=booking
 kubectl logs <pod-name> -c booking
 
 // Test it out, port 8070 is port from profile service (and code)
@@ -136,6 +141,7 @@ $ go install rccldemo.com/service
  $ go get -t github.com/google/uuid
  $ go get -t github.com/gorilla/mux
  $ go get -t github.com/go-sql-driver/mysql
+ $ go get -t github.com/pkg/errors
 
 ```
 

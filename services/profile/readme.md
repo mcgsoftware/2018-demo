@@ -27,7 +27,7 @@ that out.
 ### Build docker image from $GOPATH and upload to google repository:
 ```
 // Set the version we want to deploy
-export VER="1.20"
+export VER="1.22"
 
 go build rccldemo.com/service
 go install rccldemo.com/service
@@ -149,6 +149,7 @@ $ go install rccldemo.com/service
  $ go get -t github.com/google/uuid
  $ go get -t github.com/gorilla/mux
  $ go get -t github.com/go-sql-driver/mysql
+ $ go get -t github.com/pkg/errors
 
 ```
 

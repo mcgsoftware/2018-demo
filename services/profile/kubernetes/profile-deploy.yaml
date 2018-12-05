@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: profile
-          image: gcr.io/royal-2018-demo/profile-svc:1.21
+          image: gcr.io/royal-2018-demo/profile-svc:1.22
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8082

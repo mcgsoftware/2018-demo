@@ -1,8 +1,9 @@
 package models
 
-
-
-import "time"
+import (
+	"encoding/json"
+	"time"
+)
 
 
 //
@@ -21,4 +22,17 @@ type Profile struct {
 	FirstName string 			`json:"firstName"`
 	LastName string 			`json:"lastName"`
 	Reservations []Reservation  `json:"reservations"`
+}
+
+
+type ErrorResponse struct {
+	ErrorMsg     string    `json:"errMsg"`
+}
+func (evt *ErrorResponse) ToJson() string {
+	jsonBytes, _ := json.Marshal(&evt)
+	return (string(jsonBytes))
+}
+func (evt *ErrorResponse) ToJsonBytes() []byte {
+	jsonBytes, _ := json.Marshal(&evt)
+	return (jsonBytes)
 }

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"rccldemo.com/structlog"
 	"time"
+	//"github.com/pkg/errors"
 )
 
 var DefaultHost string = "unknown"
@@ -63,7 +64,9 @@ func LogConfig(host string, port string, sampleUrl string) {
 }
 
 
-func LogError(vdsId string, traceId string, err error, errId string, errmsg string, cxt map[string]interface{} ) {
+
+
+func LogError(vdsId string, traceId string, msg string, err error, errId string, stack string, cxt map[string]interface{} ) {
 
 	base := structlog.Base{
 		EventType: structlog.Error,
@@ -79,11 +82,11 @@ func LogError(vdsId string, traceId string, err error, errId string, errmsg stri
 
 	errInfo :=structlog.ErrorInfo{
 		ErrId: errId,
-		ErrMsg: errmsg,
+		ErrMsg: msg,
 		Blame: []string{},
 		Context: cxt,
 		Validations: nil,
-		Stack: structlog.ErrorToString(err),
+		Stack:  fmt.Sprintf("%+v", err),
 		ErrRate: true,
 		ExtErrId: "",
 	}

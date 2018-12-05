@@ -49,7 +49,7 @@ This installs service into GKE and Istio.
 
 ```
 // For minikube, need to do this to inject the envoy proxy during deployment
-istioctl kube-inject -f ./kubernetes/booking-deploy.yaml | kubectl apply -f -
+istioctl kube-inject -f ./kubernetes/logger-deploy.yaml | kubectl apply -f -
 
 // Remove old deployment
 kubectl delete deployment logger-v1 

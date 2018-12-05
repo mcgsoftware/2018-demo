@@ -1,0 +1,14 @@
+export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+
+echo $GATEWAY_URL
+
+//
+// productpage traffic
+//
+for i in {1..100}; do curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/productpage; done
+
+
+//
+// Profile traffic
+//
+for i in {1..100}; do curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/royal/api/profile/bjm100; done

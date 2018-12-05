@@ -2,6 +2,7 @@ package remote
 
 import (
 	"fmt"
+	"github.com/pkg/errors"
 	"io/ioutil"
 	"net/http"
 	"rccldemo.com/service/helpers"
@@ -39,7 +40,8 @@ func CallRemoteBookingService(traceInfo *helpers.TraceHeaders, vdsId string) ([]
 	uri := RemoteServiceUri + vdsId
 	req, err := http.NewRequest("GET", uri, nil)
 	if (err != nil) {
-		return []byte("Problem!"), err
+
+		return nil, errors.Wrapf(err, "Request creation failed to calling service: %s", uri)
 	}
 
 	// Set headers to propagate trace for Jaeger
@@ -54,19 +56,21 @@ func CallRemoteBookingService(traceInfo *helpers.TraceHeaders, vdsId string) ([]
 
 	resp, err := client.Do(req)
 	if err != nil {
-		return []byte("Problem!"), fmt.Errorf("Remote service call to Content Service failed: %s. Error: ", uri, err)
+		return nil,
+			errors.Wrapf(err, "Failed calling service: %s", uri)
 	}
 	defer resp.Body.Close()
 
 	// Parse data from remote service
 	if (resp.StatusCode != http.StatusOK) {
-		return []byte("Problem!"), fmt.Errorf("Failure from remote service. StatusCode=%v, body=%v", resp.StatusCode, "none")
+		return nil, errors.Wrapf(err, "Failure to calling service: %s. StatusCode=%d", uri, resp.StatusCode)
+
 	}
 
 	// read response as html
 	responseData, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return []byte("Problem!"), fmt.Errorf("Remote service call to Content Service failed: %s. Error: ", uri, err)
+		return nil, fmt.Errorf("Remote service call to Content Service failed: %s. Error: ", uri, err)
 	}
 
 	// debug out

@@ -3,12 +3,13 @@ package controllers
 import (
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	_ "github.com/go-sql-driver/mysql" // must do or will get a runtime error when connecting to mysql!
 	"github.com/gorilla/mux"
+	"github.com/pkg/errors"
 	"net/http"
 	"rccldemo.com/service/helpers"
 	"rccldemo.com/service/models"
+	"rccldemo.com/structlog"
 	"time"
 )
 
@@ -20,7 +21,7 @@ const sql_query = "select r.vdsid, r.shipcode, s.name, r.saildate, s.class from 
 // Gets a database connection from pool.
 // Note: We tell mysql driver to convert Date and Datetime columns into time.Time
 //
-func connect() (db *sql.DB) {
+func connect() (db *sql.DB, err error) {
 	/* local conn
 	dbDriver := "mysql"
 	dbUser := "root"
@@ -30,7 +31,6 @@ func connect() (db *sql.DB) {
 
 	/*
 	To connect to your database use these details
-
 Server: sql9.freemysqlhosting.net
 Database : sql9267914
 Username: sql9267914
@@ -51,13 +51,13 @@ Port number: 3306
 
 	// fmt.Println("connecting to mysql: ", connStr)
 
-	db, err := sql.Open(dbDriver, connStr)
+	db, err = sql.Open(dbDriver, connStr)
 
 	if (err != nil) {
-		panic(err.Error())
+		return nil, errors.Wrapf(err, "MySQL connect failed: %s", connStr)
 	}
 
-	return db
+	return db, nil
 }
 
 /*
@@ -77,18 +77,16 @@ mysql> select r.vdsid, r.shipcode, s.name, r.saildate, s.class from reservations
 func getReservations(vdsId string) ([]models.Reservation, error) {
 
 	// open mysql conn
-	db := connect()
+	db, err := connect();
+	if err != nil {
+		return nil, errors.Wrapf(err, "MySQL failed to get connection")
+	}
 	defer db.Close()
-
-	//const sql = "select r.vdsid, r.shipcode, s.name, r.saildate, s.class from reservations r, ships s where r.shipcode = s.shipcode AND vdsid = ?"
-
-	//const sql = "SELECT resid, vdsid, shipcode, saildate FROM reservations where vdsid = ?"
-	//fmt.Println("SQL: ", sql_query, "vdsId = ", vdsId)
 
 	query, err := db.Query(sql_query, vdsId)
 	if err != nil {
 		// make sure to return the sql statement to caller via error stack so it's logged.
-		return nil, fmt.Errorf("MySQL query failed: %s. Error: ", sql_query, err)
+		return nil, errors.Wrapf(err, "MySQL query failed: %s", sql_query)
 	}
 
 
@@ -104,7 +102,7 @@ func getReservations(vdsId string) ([]models.Reservation, error) {
 		var saildate time.Time
 		err := query.Scan(&dvdsid, &shipcode, &shipname, &saildate, &shipclass)
 		if (err != nil) {
-			return nil, err
+			return nil, errors.Wrapf(err,"MySQL query results scan error: %s.", sql_query )
 		}
 
 		// load fields into struct
@@ -117,8 +115,6 @@ func getReservations(vdsId string) ([]models.Reservation, error) {
 		// save struct to slice
 		reservations = append(reservations, rez)
 
-		//fmt.Println("Reservation: ", rez)
-		//fmt.Println(rez.ShipCode + " " + rez.ShipName + " " + rez.ShipClass)
 	}
 
 
@@ -149,10 +145,17 @@ func FindReservationMySqlHandler(w http.ResponseWriter, r *http.Request) {
 
 	reservations, err := getReservations(vdsId)
 	if err != nil {
-		w.Header().Set("Content-Type", "text/html")
 		w.WriteHeader(http.StatusInternalServerError)
-		msg := fmt.Sprintf("<html><body>Error: %v</body></html>", err)
-		w.Write([]byte(msg))
+
+		helpers.LogError(vdsId, traceId, "Failed to query reservations.",
+			err, "BookingErrFetchQuery", structlog.GetSrcLocation() , nil)
+
+		errResp := models.ErrorResponse{
+			ErrorMsg: "Error querying profile",
+		}
+
+		msg := errResp.ToJsonBytes()
+		w.Write(msg)
 
 		// Log the latency, even though an error calling mysql
 		defer helpers.LogServiceMetric(start, helpers.GetElapsed(start), vdsId,

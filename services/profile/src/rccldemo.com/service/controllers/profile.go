@@ -2,12 +2,12 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gorilla/mux"
 	"net/http"
 	"rccldemo.com/service/helpers"
 	"rccldemo.com/service/models"
 	"rccldemo.com/service/remote"
+	"rccldemo.com/structlog"
 	"time"
 )
 
@@ -33,12 +33,18 @@ func CallServiceHandler(w http.ResponseWriter, r *http.Request) {
 
 	data, err := remote.CallRemoteBookingService(traceHdrInfo, vdsId)
 	if err != nil {
-		fmt.Println("ERROR!")
-		fmt.Println(err)
-		w.Header().Set("Content-Type", "text/html")
+
 		w.WriteHeader(http.StatusInternalServerError)
-		msg := fmt.Sprintf("<html><body>Error: %v</body></html>", err)
-		w.Write([]byte(msg))
+
+		helpers.LogError(vdsId, traceId, "Failed calling bookings.",
+			err, "ProfileErrBookingFetch", structlog.GetSrcLocation() , nil)
+
+		errResp := models.ErrorResponse{
+			ErrorMsg: "Error fetching profile booking information.",
+		}
+
+
+		w.Write(errResp.ToJsonBytes())
 
 		// Log the latency, even though an error calling remote service
 		defer helpers.LogServiceMetric(start, helpers.GetElapsed(start), vdsId,
@@ -54,8 +60,15 @@ func CallServiceHandler(w http.ResponseWriter, r *http.Request) {
 	var res []models.Reservation
 	if err := json.Unmarshal(data, &res); err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		msg := fmt.Sprintf("Error parsing remote service call results: %v", err)
-		w.Write([]byte(msg))
+
+		helpers.LogError(vdsId, traceId, "Error parsing booking service call results.",
+			err, "ProfileErrBookingFetchParse", structlog.GetSrcLocation() , nil)
+
+		errResp := models.ErrorResponse{
+			ErrorMsg: "Error fetching profile booking information.",
+		}
+
+		w.Write(errResp.ToJsonBytes())
 		return
 	}
 

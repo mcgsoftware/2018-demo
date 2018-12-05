@@ -7,6 +7,7 @@ import (
 	"os"
 	"runtime"
 	"strings"
+
 )
 
 
@@ -33,7 +34,8 @@ func GetSrcLocation() string {
 
 // Get stack trace and error out of Go error.
 func ErrorToString(err error) string {
-	return fmt.Sprintf("%+v", err)
+	//return fmt.Sprintf("%+v", err)
+	return fmt.Sprintf("%v", err)
 }
 
 

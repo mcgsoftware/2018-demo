@@ -1,0 +1,50 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: mcg-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: mcg
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - mcg-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /royal/api/profile
+    route:
+    - destination:
+        host: profile
+  - match:
+    - uri:
+        prefix: /royal/api/login
+    route:
+    - destination:
+        host: login
+  - match:
+    - uri:
+        prefix: /royal/api/booking
+    route:
+    - destination:
+        host: booking
+  - match:
+    - uri:
+        prefix: /royal/api/logger
+    route:
+    - destination:
+        host: logger
+

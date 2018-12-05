@@ -25,7 +25,7 @@ class Logger {
   }
 
   static remoteLog(logEvent) {
-    // let local = "http://127.0.0.1:8090/royal/api/logger "
+    let local = "http://192.168.64.26:31380/royal/api/logger "
     let remote = "http://35.245.49.124/royal/api/logger"
     let url = remote 
 
