@@ -17,7 +17,9 @@ Now point browser at: http://$GATEWAY_URL/productpage
 
 ## Istio Service Graph
 
-You can view istio's service graph via: http://localhost:8088/dotviz
+You can view istio's service graph via: http://localhost:8088/dotviz?time_horizon=30m&filter_empty=true
+
+Note this shows only items that have seen traffic for the last 30 minutes (the horizon parameter).
 
 ```
 kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=servicegraph -o jsonpath='{.items[0].metadata.name}') 8088:8088 &
