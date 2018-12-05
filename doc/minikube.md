@@ -33,6 +33,44 @@ kubectl apply -f install/kubernetes/istio-demo.yaml
 kubectl get services -n istio-system
 kubectl get pods -n istio-system
 
+// AFTER all istio pods are all running/completed, install the bookinfo demo
+kubectl apply -f <(istioctl kube-inject -f samples/bookinfo/platform/kube/bookinfo.yaml)
+kubectl get services
+kubectl get pods
+kubectl get deployments
+
+// Install the bookinfo gateway
+kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+
+//
+// verify bookinfo works
+//
+
+// Get ip address of minikube
+minikube ip  => 192.168.64.2
+
+// However, you can use the host IP of the ingress service, along with the NodePort, to access the ingress. 
+// To do that, we’ll set a GATEWAY_URL variable:
+export GATEWAY_URL=$(kubectl get po -l istio=ingressgateway -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc istio-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
+
+echo $GATEWAY_URL
+
+To use it: Use GATEWAY_URL in your browser.
+
+// Alternatively, you can get the URL and port from this. 
+kubectl get services -n istio-system | grep ingress
+
+// example output: 
+NAME                   TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                                                                                                                   
+istio-ingressgateway   LoadBalancer   10.97.39.166   <pending>     80:31380/TCP,443:31390/TCP,3...
+
+
+
+
+
+// EXAMPLE OUTPUT: 192.168.64.25:31380
+
+
 ```
 
 ## Installing services
