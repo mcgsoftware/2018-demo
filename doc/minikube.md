@@ -77,6 +77,22 @@ istioctl kube-inject -f ./booking-v1/kubernetes/booking-deploy.yaml | kubectl ap
 istioctl kube-inject -f ./booking-v2/kubernetes/booking-deploy.yaml | kubectl apply -f -
 istioctl kube-inject -f ./services/profile/kubernetes/profile-deploy.yaml  | kubectl apply -f -
 
+//
+// Install mcg gateway
+//
+
+// apply mcg-gateway
+kubectl apply -f ./services/gateway/mcg-gateway.yaml
+
+// verify mcg-gateway installed
+kubectl get gateways
+
+// test gateway
+$ minikube ip  => returns ip address of minikube. Example: 192.168.64.20
+
+
+ 
+
 ```
 
 
