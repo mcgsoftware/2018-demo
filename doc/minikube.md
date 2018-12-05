@@ -1,5 +1,57 @@
 # Google Cloud Notes
-These are notes on using Google Cloud for the demo. 
+
+These are notes on using Minikube for the demo. 
+
+# Installation with Minikube
+
+## Install base istio components
+
+Do not install sidecar injector, it makes things more complicated for things like installing Kiali. 
+
+```
+// wipe existing stuff from minikube
+minikube delete
+
+// Follow the minikube startup directions below
+minikube start...
+kubectl config...
+
+// Install istio. Download it to $istio_home
+cd $istio_home
+
+// Set path to use istio tools
+vi ~/.bash_profile
+==> export PATH=$PATH:/Users/131052/Brian/metrics/istio/istio-1.0.4/bin
+
+// follow instructions from kubernetes quickstart (for istio without TLS between sidecars)
+// https://istio.io/docs/setup/kubernetes/quick-start/
+kubectl apply -f install/kubernetes/helm/istio/templates/crds.yaml
+kubectl apply -f install/kubernetes/istio-demo.yaml
+
+// verify install of stuff in istio-system namespace
+// The get pods command will take a while until everything starts up to completed or running status.
+kubectl get services -n istio-system
+kubectl get pods -n istio-system
+
+```
+
+## Installing services
+
+Do not install autmatic proxy injects. Use the istioctl command to decorate your yaml files:
+```
+istioctl kube-inject -f <your-app-spec>.yaml | kubectl apply -f -
+```
+
+
+# Start-up
+```
+// Start minikube
+minikube start --memory=8192 --disk-size=30g --kubernetes-version=v1.10.0 --vm-driver=hyperkit 
+
+// Config kubectl to look at your minikube
+kubectl config use-context minikube
+
+```
 
 # Learning kubernetes
 
