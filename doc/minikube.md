@@ -99,7 +99,10 @@ $ minikube ip  => returns ip address of minikube. Example: 192.168.64.20
 # Minikub Start-up
 ```
 // Start minikube
-minikube start --memory=8192 --disk-size=30g --kubernetes-version=v1.10.0 --vm-driver=hyperkit 
+minikube start --memory=8192 --cpus=4 --disk-size=30g --kubernetes-version=v1.10.0 \
+    --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/localkube/certs/ca.crt" \
+    --extra-config=controller-manager.cluster-signing-key-file="/var/lib/localkube/certs/ca.key" \
+    --vm-driver=hyperkit 
 
 // Config kubectl to look at your minikube
 kubectl config use-context minikube
