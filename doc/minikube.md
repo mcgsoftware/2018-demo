@@ -2,17 +2,27 @@
 
 These are notes on using Minikube for the demo. 
 
+# Minikube Start-up
+```
+// Start minikube
+minikube start --memory=8192 --disk-size=30g --kubernetes-version=v1.10.0 --vm-driver=hyperkit 
+
+// Config kubectl to look at your minikube
+kubectl config use-context minikube
+
+```
+
 # Installation with Minikube
 
 ## Install base istio components
 
-Do not install sidecar injector, it makes things more complicated for things like installing Kiali. 
+Do NOT install sidecar injector, it makes things more complicated for things like installing Kiali. 
 
 ```
-// wipe existing stuff from minikube
+// wipe existing stuff from minikube for clean cluster install
 minikube delete
 
-// Follow the minikube startup directions below
+// Follow the minikube startup directions above
 minikube start...
 kubectl config...
 
@@ -29,51 +39,12 @@ kubectl apply -f install/kubernetes/helm/istio/templates/crds.yaml
 kubectl apply -f install/kubernetes/istio-demo.yaml
 
 // verify install of stuff in istio-system namespace
-// The get pods command will take a while until everything starts up to completed or running status.
+// The get pods command will take a 12 min or more until everything starts up to completed or running status.
 kubectl get services -n istio-system
 kubectl get pods -n istio-system
-
-// AFTER all istio pods are all running/completed, install the bookinfo demo
-kubectl apply -f <(istioctl kube-inject -f samples/bookinfo/platform/kube/bookinfo.yaml)
-kubectl get services
-kubectl get pods
-kubectl get deployments
-
-// Install the bookinfo gateway
-kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
-
-//
-// verify bookinfo works
-//
-
-// Get ip address of minikube
-minikube ip  => 192.168.64.2
-
-// However, you can use the host IP of the ingress service, along with the NodePort, to access the ingress. 
-// To do that, we’ll set a GATEWAY_URL variable:
-export GATEWAY_URL=$(kubectl get po -l istio=ingressgateway -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc istio-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
-
-echo $GATEWAY_URL
-
-To use it: Use GATEWAY_URL in your browser.
-
-// Alternatively, you can get the URL and port from this. 
-kubectl get services -n istio-system | grep ingress
-
-// example output: 
-NAME                   TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                                                                                                                   
-istio-ingressgateway   LoadBalancer   10.97.39.166   <pending>     80:31380/TCP,443:31390/TCP,3...
-
-
-
-
-
-// EXAMPLE OUTPUT: 192.168.64.25:31380
-
-
 ```
 
-## Installing services
+## Installing demo services
 
 Do not install autmatic proxy injects. Use the istioctl command to decorate your yaml files:
 ```
@@ -111,8 +82,8 @@ kubectl logs -l app=logger -c logger
 // install rest of the services
 //
 cd project_home/service
-istioctl kube-inject -f ./booking-v1/kubernetes/booking-deploy.yaml | kubectl apply -f -
-istioctl kube-inject -f ./booking-v2/kubernetes/booking-deploy.yaml | kubectl apply -f -
+istioctl kube-inject -f ./services/booking-v1/kubernetes/booking-deploy.yaml | kubectl apply -f -
+istioctl kube-inject -f ./services/booking-v2/kubernetes/booking-deploy.yaml | kubectl apply -f -
 istioctl kube-inject -f ./services/profile/kubernetes/profile-deploy.yaml  | kubectl apply -f -
 
 //
@@ -126,37 +97,64 @@ kubectl apply -f ./services/gateway/mcg-gateway.yaml
 kubectl get gateways
 
 // test gateway
-$ minikube ip  => returns ip address of minikube. Example: 192.168.64.20
+export GATEWAY_URL=$(kubectl get po -l istio=ingressgateway -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc istio-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
+
+echo $GATEWAY_URL  => 192.168.64.20:31380
+
+// Run a service like profile in Postman
+GET http://192.168.64.26:31380/royal/api/profile/bjm100
 
 
+
+```
+
+
+## Install Istio BookInfo Demo (Optional)
+ Don't install this unless you want bookinfo. If you want it, install bookinfo first then install my demo
+ services. But, instead of running the gateway with mcg-gateway.yaml apply the gateway "bookinfo-gateway-mcg.yaml" instead. If you want demo without my services, apply bookinfo-gateway.yaml for the gateway setup.
  
+ ```
+// AFTER all istio-system pods are all running/completed, install the bookinfo demo
+kubectl apply -f <(istioctl kube-inject -f samples/bookinfo/platform/kube/bookinfo.yaml)
+kubectl get services
+kubectl get pods
+kubectl get deployments
+
+// Install the bookinfo gateway
+kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+
+//
+// verify bookinfo works
+//
+
+// Get ip address of minikube
+minikube ip  => 192.168.64.20
+
+// However, you can use the host IP of the ingress service, along with the NodePort, to access the ingress. 
+// To do that, we’ll set a GATEWAY_URL variable:
+export GATEWAY_URL=$(kubectl get po -l istio=ingressgateway -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc istio-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
+
+echo $GATEWAY_URL  => 192.168.64.20:31380
+
+// EXAMPLE OUTPUT: 192.168.64.25:31380
+
+
+To use it: Use GATEWAY_URL in your browser.
+http://192.168.64.20:31380/productpage
+
+// Alternatively, you can get the URL and port from this. 
+kubectl get services -n istio-system | grep ingress
+
+// example output: 
+NAME                   TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                                                                                                                   
+istio-ingressgateway   LoadBalancer   10.97.39.166   <pending>     80:31380/TCP,443:31390/TCP,3...
+
+The gateway url is same as 'minikube ip' plus 31380 from the get services for istio-ingressgateway command
 
 ```
 
 
-# Minikub Start-up
-```
-// Start minikube
-minikube start --memory=8192 --disk-size=30g --kubernetes-version=v1.10.0 --vm-driver=hyperkit 
-
-// Config kubectl to look at your minikube
-kubectl config use-context minikube
-
-```
-
-# Learning kubernetes
-
-First, create a google project, download gcloud tools and create a cluster. Their quickstart documentation is the easiest way to do this: https://cloud.google.com/kubernetes-engine/docs/quickstart. Play around with a temporary cluster and deploy something to it. 
-
-# Demo web tools
-
-## View the webapp
-```
-export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-
-echo $GATEWAY_URL
-```
-Now point browser at: http://$GATEWAY_URL/productpage
+# Monitoring Tools
 
 ## Istio Service Graph
 
