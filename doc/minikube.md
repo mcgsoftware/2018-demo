@@ -42,8 +42,45 @@ Do not install autmatic proxy injects. Use the istioctl command to decorate your
 istioctl kube-inject -f <your-app-spec>.yaml | kubectl apply -f -
 ```
 
+Do not install BookInfo samples. 
+Install my services next. This assumes the
+service yaml files are pointing to legit docker images
+per the docker image path in them. 
 
-# Start-up
+
+```
+cd project_home/services
+
+//
+// install logger service
+//
+
+cd log
+istioctl kube-inject -f ./kubernetes/logger-deploy.yaml | kubectl apply -f - 
+
+// View logs and test it, get pod name from 'get pods' command. 
+kubectl get pods
+kubectl logs -l app=logger -c logger
+kubectl port-forward logger-v1-5bc44b9b55-6vqwj 8090:8090  
+
+// in postman run with POST. Put a JSON doc in 'body'
+POST http://localhost:8090/royal/api/logger
+
+// check it worked 
+kubectl logs -l app=logger -c logger
+
+//
+// install rest of the services
+//
+cd project_home/service
+istioctl kube-inject -f ./booking-v1/kubernetes/booking-deploy.yaml | kubectl apply -f -
+istioctl kube-inject -f ./booking-v2/kubernetes/booking-deploy.yaml | kubectl apply -f -
+istioctl kube-inject -f ./services/profile/kubernetes/profile-deploy.yaml  | kubectl apply -f -
+
+```
+
+
+# Minikub Start-up
 ```
 // Start minikube
 minikube start --memory=8192 --disk-size=30g --kubernetes-version=v1.10.0 --vm-driver=hyperkit 
