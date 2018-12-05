@@ -104,8 +104,10 @@ echo $GATEWAY_URL  => 192.168.64.20:31380
 // Run a service like profile in Postman
 GET http://192.168.64.26:31380/royal/api/profile/bjm100
 
-IMPORTANT! 
-Follow instructions in the mysql readme.md file, section titled: "Configure Istio for MySQL use" for setting up egress to external MySQL database. Otherwise, the booking service will fail each time it tries to query MySql. You need to configure Istio's egress.
+// IMPORTANT! 
+// Follow instructions in the mysql readme.md file, section titled: "Configure Istio for MySQL use" for setting up 
+// egress to external MySQL database. Otherwise, the booking service will fail each time it tries to query MySql. 
+// You need to configure Istio's egress.
 
 ```
 ### IMPORTANT! Configure Egress for MySQL connection to database outside of Kubernetes cluster
