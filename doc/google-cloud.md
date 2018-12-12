@@ -15,6 +15,22 @@ echo $GATEWAY_URL
 ```
 Now point browser at: http://$GATEWAY_URL/productpage
 
+## Simple Load Testing
+Use curl to generate some simple loads:
+```
+//
+// productpage traffic
+//
+for i in {1..100}; do curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/productpage; done
+
+
+//
+// Profile traffic
+//
+for i in {1..100}; do curl -o /dev/null -s -w "%{http_code}\n" http://${GATEWAY_URL}/royal/api/profile/bjm100; done
+
+```
+
 ## Istio Service Graph
 
 You can view istio's service graph via: http://localhost:8088/dotviz
