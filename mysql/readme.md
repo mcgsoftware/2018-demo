@@ -13,13 +13,22 @@ To install the service entry, do the following steps:
   
 2. Apply the mysql-network yaml file
 ```
-   $ apply -f mysql-network.yaml
+   $ kubectl apply -f mysql-network.yaml
    
    // verify it worked
-   kubectl get serviceentry mysql-external -o yaml
+   $ kubectl get serviceentry mysql-external -o yaml
 ```
 
+# Using mysql command line
+Using mysql shell.
+```
+// login and enter the passwd
+$ mysql -u sql9267914 -p -h sql9.freemysqlhosting.net
 
+mysql> use sql9267914;
+mysql> show tables;
+...
+```
 # Using MySQL in GCP
 
 ```
@@ -29,8 +38,6 @@ gcloud sql connect royal-mysql --user=root
 
 ```
 
-## Todo
-- add shipinfo table
-  - refactor reservations table to use fkey instead of enum
-  - refactor service to pull ship name via join of tables
+# Database Setup
+Apply the schema.sql and data.sql files to the mysql database. 
 

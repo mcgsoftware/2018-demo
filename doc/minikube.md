@@ -1,19 +1,165 @@
 # Google Cloud Notes
-These are notes on using Google Cloud for the demo. 
 
-# Learning kubernetes
+These are notes on using Minikube for the demo. 
 
-First, create a google project, download gcloud tools and create a cluster. Their quickstart documentation is the easiest way to do this: https://cloud.google.com/kubernetes-engine/docs/quickstart. Play around with a temporary cluster and deploy something to it. 
-
-# Demo web tools
-
-## View the webapp
+# Minikube Start-up
 ```
-export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+// Start minikube
+minikube start --memory=8192 --disk-size=30g --kubernetes-version=v1.10.0 --vm-driver=hyperkit 
 
-echo $GATEWAY_URL
+// Config kubectl to look at your minikube
+kubectl config use-context minikube
+
 ```
-Now point browser at: http://$GATEWAY_URL/productpage
+
+# Installation with Minikube
+
+## Install base istio components
+
+Do NOT install sidecar injector, it makes things more complicated for things like installing Kiali. 
+
+```
+// wipe existing stuff from minikube for clean cluster install
+minikube delete
+
+// Follow the minikube startup directions above
+minikube start...
+kubectl config...
+
+// Install istio. Download it to $istio_home
+cd $istio_home
+
+// Set path to use istio tools
+vi ~/.bash_profile
+==> export PATH=$PATH:/Users/131052/Brian/metrics/istio/istio-1.0.4/bin
+
+// follow instructions from kubernetes quickstart (for istio without TLS between sidecars)
+// https://istio.io/docs/setup/kubernetes/quick-start/
+kubectl apply -f install/kubernetes/helm/istio/templates/crds.yaml
+kubectl apply -f install/kubernetes/istio-demo.yaml
+
+// verify install of stuff in istio-system namespace
+// The get pods command will take a 12 min or more until everything starts up to completed or running status.
+kubectl get services -n istio-system
+kubectl get pods -n istio-system
+```
+
+## Installing demo services
+
+Do not install autmatic proxy injects. Use the istioctl command to decorate your yaml files:
+```
+istioctl kube-inject -f <your-app-spec>.yaml | kubectl apply -f -
+```
+
+Do not install BookInfo samples. 
+Install my services next. This assumes the
+service yaml files are pointing to legit docker images
+per the docker image path in them. 
+
+
+```
+cd project_home/services
+
+//
+// install logger service
+//
+
+cd log
+istioctl kube-inject -f ./kubernetes/logger-deploy.yaml | kubectl apply -f - 
+
+// View logs and test it, get pod name from 'get pods' command. 
+kubectl get pods
+kubectl logs -l app=logger -c logger
+kubectl port-forward logger-v1-5bc44b9b55-6vqwj 8090:8090  
+
+// in postman run with POST. Put a JSON doc in 'body'
+POST http://localhost:8090/royal/api/logger
+
+// check it worked 
+kubectl logs -l app=logger -c logger
+
+//
+// install rest of the services
+//
+cd project_home/service
+istioctl kube-inject -f ./services/booking-v1/kubernetes/booking-deploy.yaml | kubectl apply -f -
+istioctl kube-inject -f ./services/booking-v2/kubernetes/booking-deploy.yaml | kubectl apply -f -
+istioctl kube-inject -f ./services/profile/kubernetes/profile-deploy.yaml  | kubectl apply -f -
+
+//
+// Install mcg gateway
+//
+
+// apply mcg-gateway
+kubectl apply -f ./services/gateway/mcg-gateway.yaml
+
+// verify mcg-gateway installed
+kubectl get gateways
+
+// test gateway
+export GATEWAY_URL=$(kubectl get po -l istio=ingressgateway -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc istio-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
+
+echo $GATEWAY_URL  => 192.168.64.20:31380
+
+// Run a service like profile in Postman
+GET http://192.168.64.26:31380/royal/api/profile/bjm100
+
+// IMPORTANT! 
+// Follow instructions in the mysql readme.md file, section titled: "Configure Istio for MySQL use" for setting up 
+// egress to external MySQL database. Otherwise, the booking service will fail each time it tries to query MySql. 
+// You need to configure Istio's egress.
+
+```
+### IMPORTANT! Configure Egress for MySQL connection to database outside of Kubernetes cluster
+Follow instructions in the mysql readme.md file, section titled: "Configure Istio for MySQL use" for setting up egress to external MySQL database. Otherwise, the booking service will fail each time it tries to query MySql. You need to configure Istio's egress.
+
+
+## Install Istio BookInfo Demo (Optional)
+ Don't install this unless you want bookinfo. If you want it, install bookinfo first then install my demo
+ services. But, instead of running the gateway with mcg-gateway.yaml apply the gateway "bookinfo-gateway-mcg.yaml" instead. If you want demo without my services, apply bookinfo-gateway.yaml for the gateway setup.
+ 
+ ```
+// AFTER all istio-system pods are all running/completed, install the bookinfo demo
+kubectl apply -f <(istioctl kube-inject -f samples/bookinfo/platform/kube/bookinfo.yaml)
+kubectl get services
+kubectl get pods
+kubectl get deployments
+
+// Install the bookinfo gateway
+kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+
+//
+// verify bookinfo works
+//
+
+// Get ip address of minikube
+minikube ip  => 192.168.64.20
+
+// However, you can use the host IP of the ingress service, along with the NodePort, to access the ingress. 
+// To do that, we’ll set a GATEWAY_URL variable:
+export GATEWAY_URL=$(kubectl get po -l istio=ingressgateway -n istio-system -o 'jsonpath={.items[0].status.hostIP}'):$(kubectl get svc istio-ingressgateway -n istio-system -o 'jsonpath={.spec.ports[0].nodePort}')
+
+echo $GATEWAY_URL  => 192.168.64.20:31380
+
+// EXAMPLE OUTPUT: 192.168.64.25:31380
+
+
+To use it: Use GATEWAY_URL in your browser.
+http://192.168.64.20:31380/productpage
+
+// Alternatively, you can get the URL and port from this. 
+kubectl get services -n istio-system | grep ingress
+
+// example output: 
+NAME                   TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)                                                                                                                   
+istio-ingressgateway   LoadBalancer   10.97.39.166   <pending>     80:31380/TCP,443:31390/TCP,3...
+
+The gateway url is same as 'minikube ip' plus 31380 from the get services for istio-ingressgateway command
+
+```
+
+
+# Monitoring Tools
 
 ## Istio Service Graph
 
